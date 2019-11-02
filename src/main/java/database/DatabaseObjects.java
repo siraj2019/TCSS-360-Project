@@ -1,13 +1,13 @@
-package main.java;
+package main.java.database;
 
 import java.util.List;
 
-public interface databaseObjects {
+public interface DatabaseObjects {
     
     /**
      * Gets attributes from the database
      */
-    public List get();
+    List get();
 
 
 }
