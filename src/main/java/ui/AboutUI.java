@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import main.java.database.DatabaseAbout;
 
 
 public class AboutUI extends Application {
@@ -42,7 +43,13 @@ public class AboutUI extends Application {
     private void initAboutText(Pane rootPane) {
         Text textBlock = new Text();
         try {
-            textBlock.setText("Default About Text.");
+            String dataText = new String();
+            for(String s : new DatabaseAbout().get()) {
+                dataText += s;
+                dataText += System.lineSeparator();
+            }
+
+            textBlock.setText(dataText);
 
             VBox box = new VBox();
             box.setPadding(new Insets(10,20,50,50));

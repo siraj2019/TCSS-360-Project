@@ -1,5 +1,9 @@
 package main.java.database;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +12,7 @@ public class DatabaseAbout implements DatabaseObjects {
     @Override
     public List<String> get() {
         List <String> returnList = new ArrayList<>();
-        String filename = "testfile.csv";
+        String filename = "src/main/java/database/about.csv";
         BufferedReader br = null;
         String line = "";
         String token = ",";
