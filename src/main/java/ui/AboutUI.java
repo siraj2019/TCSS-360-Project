@@ -1,11 +1,16 @@
 package main.java.ui;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+
 
 public class AboutUI extends Application {
 
@@ -25,8 +30,28 @@ public class AboutUI extends Application {
 
         Scene scene = new Scene(mainPane, 300, 200);
 
+        // Add About popup to main scene.
+        initAboutText(mainPane);
+
+        // Launches main UI screen
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+    private void initAboutText(Pane rootPane) {
+        Text textBlock = new Text();
+        try {
+            textBlock.setText("Default About Text.");
+
+            VBox box = new VBox();
+            box.setPadding(new Insets(10,20,50,50));
+            box.getChildren().add(textBlock);
+
+            rootPane.getChildren().add(box);
+        } catch (Exception e) {
+            textBlock.setText(e.getMessage());
+            rootPane.getChildren().add(textBlock);
+        }
     }
 }
