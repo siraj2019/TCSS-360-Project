@@ -12,7 +12,6 @@ public class MainUI extends Application {
 
     private Stage primaryStage;
     private BorderPane rootBorder;
-
     private String programTitle;
 
     /**
@@ -48,6 +47,8 @@ public class MainUI extends Application {
 
         primaryStage.show();
 
+        AboutUI about = new AboutUI();
+        about.start(new Stage());
     }
 
 
