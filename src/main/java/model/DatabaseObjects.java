@@ -1,4 +1,4 @@
-package main.java.database;
+package main.java.model;
 
 import java.util.List;
 

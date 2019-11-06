@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import main.java.database.DatabaseAbout;
+import main.java.model.Version;
 
 
 public class AboutUI extends Application {
@@ -44,7 +44,7 @@ public class AboutUI extends Application {
         Text textBlock = new Text();
         try {
             String dataText = new String();
-            for(String s : new DatabaseAbout().get()) {
+            for(String s : new Version().get()) {
                 dataText += s;
                 dataText += System.lineSeparator();
             }

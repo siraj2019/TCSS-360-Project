@@ -1,4 +1,4 @@
-package main.java.database;
+package main.java.model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,9 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseAbout implements DatabaseObjects {
+public class Version {
 
-    @Override
     public List<String> get() {
         List <String> returnList = new ArrayList<>();
         String filename = "src/main/java/database/about.csv";
