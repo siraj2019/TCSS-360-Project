@@ -26,12 +26,12 @@ public class Setting {
         return ID;
     }
 
-    private void generateID() {
+    public void generateID() {
         this.ID = UUID.randomUUID();
     }
 
     public String getName() {
-        return "Setting Name";
+        return name;
     }
 
     public void setName(String name) {
