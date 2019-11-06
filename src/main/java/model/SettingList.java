@@ -1,6 +1,7 @@
 package main.java.model;
 
 import java.util.HashSet;
+import java.util.UUID;
 
 public class SettingList {
     private HashSet<Setting> settings;
@@ -15,5 +16,13 @@ public class SettingList {
 
     public void setSettings(HashSet<Setting> settings) {
         this.settings = settings;
+    }
+
+
+    public void getSetting(String ID) {
+    }
+
+    public void getSetting(UUID ID){
+
     }
 }
