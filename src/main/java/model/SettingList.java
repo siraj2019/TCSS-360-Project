@@ -1,6 +1,7 @@
 package main.java.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SettingList {
@@ -14,8 +15,18 @@ public class SettingList {
         return settings;
     }
 
-    public void setSettings(HashSet<Setting> settings) {
-        this.settings = settings;
+    public HashSet<Setting> getExportableSettings() {
+        HashSet filteredSettings = new HashSet<Setting>();
+        for (Setting setting: this.settings) {
+            if (setting.isExportable())
+                filteredSettings.add(setting);
+        }
+        return filteredSettings;
+    }
+
+
+    public void addSetting(Setting setting) {
+        this.settings.add(Objects.requireNonNull(setting));
     }
 
 
