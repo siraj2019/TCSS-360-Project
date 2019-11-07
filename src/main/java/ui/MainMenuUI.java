@@ -14,12 +14,11 @@ import java.util.Objects;
 
 public class MainMenuUI {
 
-    protected Menu menu;
     MenuBar menubar;
     private LinkedList<MenuItem> menuItemList;
 
     public void start(BorderPane primaryPane) {
-        menu = new Menu();
+
         menubar = new MenuBar();
         menubar.prefWidthProperty().bind(primaryPane.widthProperty());
         VBox box = new VBox(menubar);
@@ -33,7 +32,7 @@ public class MainMenuUI {
 
     public void addMenuItem(Menu menu, MenuItem item) {
         try {
-            this.menu.getItems().add(Objects.requireNonNull(item));
+            menu.getItems().add(Objects.requireNonNull(item));
         } catch (Exception e) {
             //TODO: Create error logging
         }

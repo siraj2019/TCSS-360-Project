@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -17,26 +18,27 @@ import javafx.stage.Stage;
 import main.java.model.Version;
 
 
-public class AboutUI extends Application implements MenuItemInterface {
+public class SettingsUI extends Application implements MenuItemInterface {
+
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("About");
-        TilePane mainPane = new TilePane();
+        primaryStage.setTitle("Settings");
+        VBox settingsPane = new VBox();
 
-        Label label = new Label("This is the About section.");
+        Label label = new Label("This is the settings section.");
 
-        Popup aboutPopup = new Popup();
+        Popup settingsPopup = new Popup();
 
-        aboutPopup.getContent().add(label);
+        settingsPopup.getContent().add(label);
 
-        label.setPrefHeight(200);
-        label.setPrefWidth(150);
+        label.setPrefHeight(300);
+        label.setPrefWidth(500);
 
-        Scene scene = new Scene(mainPane, 300, 200);
+        Scene scene = new Scene(settingsPane, 300, 500);
 
         // Add About popup to main scene.
-        initAboutText(mainPane);
+        initSettingsPane(settingsPane);
 
         // Launches main UI screen
         primaryStage.setScene(scene);
@@ -44,22 +46,10 @@ public class AboutUI extends Application implements MenuItemInterface {
 
     }
 
-    private void initAboutText(Pane rootPane) {
-        Text textBlock = new Text();
+    private void initSettingsPane(VBox rootPane) {
+        Text textBlock = new Text("Settings Text");
         try {
-            String dataText = new String();
-            for(String s : new Version().get()) {
-                dataText += s;
-                dataText += System.lineSeparator();
-            }
-
-            textBlock.setText(dataText);
-
-            VBox box = new VBox();
-            box.setPadding(new Insets(10,20,50,50));
-            box.getChildren().add(textBlock);
-
-            rootPane.getChildren().add(box);
+            rootPane.getChildren().add(new SettingsUIElement("Setting Name", "TEST", "Description text.").asPane());
         } catch (Exception e) {
             textBlock.setText(e.getMessage());
             rootPane.getChildren().add(textBlock);
@@ -67,7 +57,7 @@ public class AboutUI extends Application implements MenuItemInterface {
     }
 
     public void initMenu(Menu rootMenu) {
-        MenuItem aboutMenuItem = new MenuItem("About");
+        MenuItem aboutMenuItem = new MenuItem("Settings");
         aboutMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

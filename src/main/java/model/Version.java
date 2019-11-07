@@ -11,7 +11,7 @@ public class Version {
 
     public List<String> get() {
         List <String> returnList = new ArrayList<>();
-        String filename = "src/main/java/database/about.csv";
+        String filename = "src/resources/about.csv";
         BufferedReader br = null;
         String line = "";
         String token = ",";

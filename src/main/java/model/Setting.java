@@ -6,6 +6,7 @@ public class Setting {
     private UUID ID;
     private String name;
     private String value;
+    private String description;
     private boolean exportable;
 
     public Setting(String name, String value) {
