@@ -1,12 +1,12 @@
 package main.java.ui;
 
 import javafx.event.EventHandler;
-import javafx.scene.Node;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.util.UUID;
 
@@ -21,20 +21,21 @@ public class SettingsUIElement {
     private Pane pane;
 
     // https://stackoverflow.com/questions/43877557/the-correct-way-to-handle-and-extend-node-in-javafx
-    public SettingsUIElement(String name, String value, String description) {
+    public SettingsUIElement(String name, String value) {
         this.ID = UUID.randomUUID();
         this.name = name;
         this.value = value;
-        this.description = description;
 
         Label labelName = new Label(name);
-        Label labelValue = new Label(value);
-        Label labelDescription = new Label(description);
+        TextField labelValue = new TextField(value);
 
+        this.pane = new Pane();
         HBox hbox = new HBox();
+
+        hbox.setAlignment(Pos.CENTER);
+
         hbox.getChildren().addAll(labelName, labelValue);
 
-        this.pane = new HBox();
         this.pane.getChildren().add(hbox);
 
         this.pane.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -56,5 +57,10 @@ public class SettingsUIElement {
 
     public Pane asPane() {
         return this.pane;
+    }
+
+    @Override
+    public String toString() {
+        return "Setting: "+this.name + "=" + this.value;
     }
 }
