@@ -51,9 +51,7 @@ public class SettingsUI extends Application implements MenuItemInterface {
     }
 
     private void initSettingsPane(BorderPane rootPane) {
-        Text textBlock = new Text("Settings Text");
-        settingsHandler.addSetting(new Setting("TEST1", "VAL1"));
-        System.out.println( settingsHandler.getSettings().isEmpty());
+
         try {
             ObservableList<GridPane> panes = FXCollections.observableArrayList();
 
@@ -71,7 +69,7 @@ public class SettingsUI extends Application implements MenuItemInterface {
 
 
         } catch (Exception e) {
-            textBlock.setText(e.getMessage());
+            Text textBlock = new Text(e.getMessage());
             rootPane.getChildren().add(textBlock);
         }
     }
