@@ -1,4 +1,4 @@
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane fx:controller="sample.Controller"
-            xmlns:fx="http://javafx.com/fxml" prefWidth="1000">
+<BorderPane fx:controller="tests.Controller"
+            xmlns:fx="http://javafx.com/fxml" prefWidth="800">
 </BorderPane>

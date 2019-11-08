@@ -1,19 +1,26 @@
 package main.java.ui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class MainUI extends Application {
 
     private Stage primaryStage;
     private BorderPane rootBorder;
-
     private String programTitle;
+    private MainMenuUI mainMenu;
 
     /**
      * Sample taken from:
@@ -46,8 +53,38 @@ public class MainUI extends Application {
         //Creates a frame in the primary stage
         initRootLayout();
 
-        primaryStage.show();
+        // Main Menu.
+        // Must be before any element that adds a menu item.
+        initMainMenu();
 
+        ArrayList<Menu> rootMenus = new ArrayList<Menu>();
+
+        // File Menu
+        Menu fileMenu = new Menu("File");
+        rootMenus.add(fileMenu);
+
+        // Help Menu
+        Menu helpMenu = new Menu("Help");
+        rootMenus.add(helpMenu);
+
+
+        // Adds all root menus to main menu bar.
+        for (Menu menu: rootMenus
+             ) {
+            this.mainMenu.addMenu(menu);
+        }
+
+
+        // Creates About Popup.
+        AboutUI about = new AboutUI();
+        about.initMenu(helpMenu);
+
+        // Creates Settings Popup.
+        SettingsUI settings = new SettingsUI();
+        settings.initMenu(fileMenu);
+
+
+        primaryStage.show();
     }
 
 
@@ -73,4 +110,15 @@ public class MainUI extends Application {
         }
 
     }
+
+    private void initMainMenu() {
+        MainMenuUI menu = new MainMenuUI();
+        menu.start(rootBorder);
+        this.mainMenu = menu;
+    }
+
+    private void initMenu(Menu rootMenu) {
+
+    }
 }
+
