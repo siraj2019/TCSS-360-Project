@@ -44,7 +44,7 @@
     "UPDATE HotelAvailability SET rooms_available = " +
     "(rooms_available - ?) WHERE hotel_id = ? " +
     "AND booking_date BETWEEN ? AND ?");
-<span>-- this sample code sets the values of dynamic parameters
+<span>-- this tests code sets the values of dynamic parameters
 -- to be the values of program variables</span>
 ps2.setInt(1, numberRooms);
 ps2.setInt(2, theHotel.hotelId);

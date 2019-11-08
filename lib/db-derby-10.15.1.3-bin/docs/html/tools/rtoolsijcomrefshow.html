@@ -116,10 +116,10 @@ with an asterisk (<samp class="codeph">*</samp>) after its name.</p>
 </div>
 
 <div class="example"><h2 class="sectiontitle">SHOW CONNECTIONS Example</h2>
-<pre>ij&gt; <strong>connect 'sample' as sample1;</strong>
+<pre>ij&gt; <strong>connect 'tests' as sample1;</strong>
 ij&gt; <strong>connect 'newDB;create=true' as newDB;</strong>
 ij(NEWDB)&gt; <strong>show connections;</strong>
-SAMPLE1 -        jdbc:derby:sample
+SAMPLE1 -        jdbc:derby:tests
 NEWDB* -        jdbc:derby:newDB;create=true
 * = current connection
 ij(NEWDB)&gt;</pre>

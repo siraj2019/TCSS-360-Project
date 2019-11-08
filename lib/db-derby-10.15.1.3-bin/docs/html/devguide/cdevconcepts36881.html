@@ -66,8 +66,8 @@ to specify which database to connect to and other details.</p>
 connections to two different databases in the current system.</p>
 
 <pre>Connection conn = DriverManager.getConnection(
-    "jdbc:derby:sample");
-System.out.println("Connected to database sample");
+    "jdbc:derby:tests");
+System.out.println("Connected to database tests");
 conn.setAutoCommit(false);
 Connection conn2 = DriverManager.getConnection(
     "jdbc:derby:newDB;create=true");

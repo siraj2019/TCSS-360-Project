@@ -168,7 +168,7 @@ privileges on the table.</p>
 
 <div class="section"><h2 class="sectiontitle">Example exporting data from a query using a separate export
 file for the LOB data</h2>The following example shows how to export employee
-data in department 20 from the STAFF table in a sample database to the main
+data in department 20 from the STAFF table in a tests database to the main
 file <samp class="codeph">staff.del</samp> and the lob data to the file <samp class="codeph">pictures.dat</samp>. <pre>CALL SYSCS_UTIL.SYSCS_EXPORT_QUERY_LOBS_TO_EXTFILE(
     'SELECT * FROM STAFF WHERE dept=20',
     'c:\data\staff.del', ',' ,'"',

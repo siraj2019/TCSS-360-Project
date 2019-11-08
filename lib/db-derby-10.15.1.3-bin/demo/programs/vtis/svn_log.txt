@@ -6049,7 +6049,7 @@ Since result set materialization comes for "free" with hash joins, that fact we 
 
 The details of the patch are included as DERBY-781_v1.html.  I added a simple test to lang/subquery.sql to demonstrate that the optimizer can and will choose to do hash joins for subqueries, and I updated one other master file--predicatesIntoViews--for which the optimizer is now choosing a hash join instead of a nested loop.  Testing of "unsafe" hash joins (see section VII of the document) and generation of correct plans is done through existing tests, esp. the lang/lojreorder.sql test, which was very useful in helping to verify the correctness of the changes.
 
-Note that I did not add the sample union query shown in the description for this issue to the tests because when I run it against the current codeline, the optimizer will already choose to do materialization of the UnionNode (via hash join) even without the patch for this issue, and thus it didn't seem like that particular test case was useful.  The new test in subqery.sql is more relevant because the optimizer will choose to do a nested loop join with the subquery before my changes and will do a hash join after my changes, which seems to more accurately reflect what this issue is about.
+Note that I did not add the tests union query shown in the description for this issue to the tests because when I run it against the current codeline, the optimizer will already choose to do materialization of the UnionNode (via hash join) even without the patch for this issue, and thus it didn't seem like that particular test case was useful.  The new test in subqery.sql is more relevant because the optimizer will choose to do a nested loop join with the subquery before my changes and will do a hash join after my changes, which seems to more accurately reflect what this issue is about.
 
 I ran derbyall using sane jars on Red Hat Linux with ibm142 and saw no new failures, and the overall execution time does not change despite the extra work the optimizer is doing.
 
@@ -12169,7 +12169,7 @@ Ataching a patch 'derby-885.diff' which adds new j9 masters for nist/dml160.sql 
 ------------------------------------------------------------------------
 r375715 | davidvc | 2006-02-07 13:18:08 -0800 (Tue, 07 Feb 2006) | 3 lines
 
-DERBY-387: Fix Simple Network Client sample to work correctly by fixing
+DERBY-387: Fix Simple Network Client tests to work correctly by fixing
 database name.  Contributed by Rajesh Kartha
 
 ------------------------------------------------------------------------

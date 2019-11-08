@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
@@ -52,14 +52,16 @@ public class SettingsUI extends Application implements MenuItemInterface {
         settingsHandler.addSetting(new Setting("TEST1", "VAL1"));
         System.out.println( settingsHandler.getSettings().isEmpty());
         try {
-            ObservableList<Pane> panes = FXCollections.observableArrayList();
-            for (SettingsUIElement element : settingsHandler.getSettingsUIElements()
+            ObservableList<GridPane> panes = FXCollections.observableArrayList();
+
+            for (Setting setting : settingsHandler.getSettings()
                  ) {
+                SettingsUIElement element = new SettingsUIElement(setting);
                 panes.add(element.asPane());
                 System.out.println(element.toString());;
             }
 
-            ListView<Pane> settingsList = new ListView<Pane>(panes);
+            ListView<GridPane> settingsList = new ListView<GridPane>(panes);
             settingsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             rootPane.getChildren().add(settingsList);
 

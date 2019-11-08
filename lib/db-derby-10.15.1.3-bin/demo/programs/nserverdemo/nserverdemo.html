@@ -17,13 +17,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML lang="en">
 <HEAD>
-<TITLE>Derby Network Server sample program</TITLE>
+<TITLE>Derby Network Server tests program</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
 </HEAD>
 <BODY>
 <H2><A name=Top_Of_Page></A><A name=nsrun></A><A name=nssample></A>Derby 
-Network Server sample program</H2>
-<P>The Network Server sample demo program (NsSample) is a simple JDBC application that 
+Network Server tests program</H2>
+<P>The Network Server tests demo program (NsSample) is a simple JDBC application that
 interacts with the Derby Network Server. The program:</P>
 <OL>
   <LI>Starts the Derby Network Server.</LI>
@@ -45,14 +45,14 @@ interacts with the Derby Network Server. The program:</P>
 </OL>
 <P>The following files in the
 <TT><i>DERBY_INSTALL</i>\demo\programs\nserverdemo\</TT> directory are needed to
-run the sample program (<i>DERBY_INSTALL</i> is the directory where you
+run the tests program (<i>DERBY_INSTALL</i> is the directory where you
 installed Derby):</P>
 <UL>
   <LI><TT>NsSample.java</tt><br>
 This is the entry point into the demo application. The program starts up two clients. One client opens an embedded 
 connection to perform database operations, while the other client opens a client 
 connection to the Derby Network Server to perform database operations.  This program provides the following constants that 
-can be changed to modify the sample demo:
+can be changed to modify the tests demo:
 <UL>
 
     <LI><tt>NUM_ROWS</tt> - The number of rows that must be initially loaded into the schema.</li>
@@ -61,7 +61,7 @@ can be changed to modify the sample demo:
     <LI><tt>NETWORKSERVER_PORT</tt> - The port on which the network server is running.</LI>
 </UL>
 
-You can also modify the program to exclude starting the Network Server as part of the sample program. 
+You can also modify the program to exclude starting the Network Server as part of the tests program.
 Make sure to recompile the Java files before running the program if you make any 
 changes to the source code.
 
@@ -75,7 +75,7 @@ necessary work by instantiating a <tt>NsSampleWork</tt> instance.</li>
     <LI>The <tt>NsSampleWork</tt> class contains everything required to perform 
 DML operations using JDBC calls. The <tt>doWork</tt> method in 
 the <tt>NsSampleWork</tt> class represents all the work done as 
-part of this sample program.</LI>
+part of this tests program.</LI>
 </UL>
 </li>
   <LI><tt>NetworkServerUtil.java</tt><br>

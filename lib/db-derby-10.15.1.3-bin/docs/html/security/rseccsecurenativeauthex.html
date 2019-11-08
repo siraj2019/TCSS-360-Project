@@ -328,7 +328,7 @@ public class NativeAuthenticationExample
     public void createUsers( Connection conn ) 
         throws SQLException
     {
-        println( "Storing some sample users in the database." );
+        println( "Storing some tests users in the database." );
 
         PreparedStatement   ps = prepare
             ( conn, "call syscs_util.syscs_create_user( ?, ? )" );
@@ -390,7 +390,7 @@ public class NativeAuthenticationExample
     public void dropUsers( Connection conn ) 
         throws SQLException
     {
-        println( "Dropping sample users from the database..." );
+        println( "Dropping tests users from the database..." );
 
         PreparedStatement   ps = prepare
             ( conn, "call syscs_util.syscs_drop_user( ? )" );

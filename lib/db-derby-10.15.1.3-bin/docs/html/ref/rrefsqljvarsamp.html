@@ -26,8 +26,8 @@
 <meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
 <meta content="reference" name="DC.Type" />
 <meta name="DC.Title" content="VAR_SAMP function" />
-<meta name="abstract" content="VAR_SAMP is an aggregate function that evaluates the sample variance of an expression over a set of rows." />
-<meta name="description" content="VAR_SAMP is an aggregate function that evaluates the sample variance of an expression over a set of rows." />
+<meta name="abstract" content="VAR_SAMP is an aggregate function that evaluates the tests variance of an expression over a set of rows." />
+<meta name="description" content="VAR_SAMP is an aggregate function that evaluates the tests variance of an expression over a set of rows." />
 <meta content="VAR_SAMP aggregate function" name="DC.subject" />
 <meta content="VAR_SAMP aggregate function" name="keywords" />
 <meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
@@ -45,7 +45,7 @@
 
 
 <div><p>VAR_SAMP is an aggregate function that evaluates the
- sample variance of an expression over a set of rows.</p>
+ tests variance of an expression over a set of rows.</p>
 
 <div class="section"><p>See <a href="rrefsqlj33923.html#rrefsqlj33923">Aggregates (set functions)</a> for more
 information about these functions.</p>
@@ -87,7 +87,7 @@ x<sub>1</sub> ... x<sub>n</sub> are the items in the population
 
 
 <div class="example"><h2 class="sectiontitle">Example</h2>
-<pre><strong>-- find the sample variance in flight time per aircraft
+<pre><strong>-- find the tests variance in flight time per aircraft
 SELECT AIRCRAFT, VAR_SAMP( flying_time )
 FROM flights GROUP BY aircraft;
 </strong></pre>

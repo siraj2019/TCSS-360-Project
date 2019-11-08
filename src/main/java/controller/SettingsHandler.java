@@ -1,51 +1,37 @@
 package main.java.controller;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import main.java.model.Setting;
-import main.java.ui.SettingsUIElement;
 
-import java.util.HashMap;
+import java.util.Iterator;
 
 public class SettingsHandler {
 
-    private ObservableList<Setting> settingList ;
-    private ObservableList<SettingsUIElement> settingUIList;
-    private HashMap<Setting, SettingsUIElement> settingMap = new HashMap<>();
+    private ObservableSet<Setting> settingList ;
 
     public SettingsHandler() {
-        this.settingList = FXCollections.observableArrayList();
-        settingUIList = FXCollections.observableArrayList();
-        settingMap = new HashMap<Setting, SettingsUIElement>();
+        this.settingList = FXCollections.observableSet();
     }
 
     //https://www.tutorialspoint.com/java/util/observable_addobserver.htm
     public void addSetting(Setting setting) {
         settingList.add(setting);
-        this.updateSettingsUIList();
     }
 
-    // For every setting not mapped to a UI element, create a UI element and update the UI element list.
-    private void updateSettingsUIList() {
-        for (Setting setting: settingList
-        ) {
-            if(!settingMap.containsKey(setting)) {
-                SettingsUIElement element = new SettingsUIElement(setting.getName(), setting.getValue());
-                settingUIList.add(element);
-                settingMap.put(setting,element);
+    public void updateSetting(Setting setting, String value) {
+        for (Iterator<Setting> it = this.settingList.iterator(); it.hasNext();
+             ) {
+            Setting settingInSet = it.next();
+            if (setting.equals(settingInSet)) {
+                settingInSet.setValue(value);
             }
-
         }
     }
 
     // Maintains a list of all settings.
-    public ObservableList<Setting> getSettings() {
+    public ObservableSet<Setting> getSettings() {
         return settingList;
-    }
-
-    // Maintains a list of all setting UI elements.  UI will automatically update when this list is updated.
-    public ObservableList<SettingsUIElement> getSettingsUIElements() {
-        return settingUIList;
     }
 
 

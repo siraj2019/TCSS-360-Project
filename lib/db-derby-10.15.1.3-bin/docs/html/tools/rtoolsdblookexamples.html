@@ -26,8 +26,8 @@
 <meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
 <meta content="reference" name="DC.Type" />
 <meta name="DC.Title" content="dblook examples" />
-<meta name="abstract" content="The following examples demonstrate how the various dblook utility options can be specified from a command line. These examples use the sample database." />
-<meta name="description" content="The following examples demonstrate how the various dblook utility options can be specified from a command line. These examples use the sample database." />
+<meta name="abstract" content="The following examples demonstrate how the various dblook utility options can be specified from a command line. These examples use the tests database." />
+<meta name="description" content="The following examples demonstrate how the various dblook utility options can be specified from a command line. These examples use the tests database." />
 <meta content="dblook, examples" name="DC.subject" />
 <meta content="dblook, examples" name="keywords" />
 <meta scheme="URI" name="DC.Relation" content="ctoolsdblook.html" />
@@ -49,7 +49,7 @@
 
 <div><p>The following examples demonstrate how the various
 <samp class="codeph">dblook</samp> utility options can be specified from a command line.
-These examples use the <samp class="codeph">sample</samp> database.</p>
+These examples use the <samp class="codeph">tests</samp> database.</p>
 
 <div class="section">
 <div class="note"><span class="notetitle">Note: </span>The quotation marks shown in these examples are part of the command
@@ -70,10 +70,10 @@ utility.</p>
 
 <div class="example"><h2 class="sectiontitle">Writing the DDL to the console</h2>
 <p>You can write the DDL to the console for everything that is in the
-<samp class="codeph">sample</samp> database. In this example, the database is in the
+<samp class="codeph">tests</samp> database. In this example, the database is in the
 current directory. For example:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests</strong></pre>
 
 </div>
 
@@ -82,16 +82,16 @@ current directory. For example:</p>
 console. The messages are written using <samp class="codeph">System.err</samp>. For
 example:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample -verbose</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests -verbose</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Writing the DDL to a file</h2>
 <p>You can write the DDL to a file called <samp class="codeph">myDB_DDL.sql</samp> for
-everything that is in the <samp class="codeph">sample</samp> database. In this example, the
+everything that is in the <samp class="codeph">tests</samp> database. In this example, the
 database and file are in the current directory. For example:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample -o myDB_DDL.sql</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests -o myDB_DDL.sql</strong></pre>
 
 </div>
 
@@ -99,69 +99,69 @@ database and file are in the current directory. For example:</p>
 <p>If the database or file is not in the current directory, you must specify the
 directory path. For example:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d 'jdbc:derby:c:\private\stuff\sample'
+<pre><strong>java org.apache.derby.tools.dblook -d 'jdbc:derby:c:\private\stuff\tests'
    -o 'C:\temp\newDB.sql'</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Specifying a schema in the dblook command</h2>
 <p>You can specify the schema for the database. To write the DDL to the console,
-for all of the objects in the <samp class="codeph">sample</samp> database where the
+for all of the objects in the <samp class="codeph">tests</samp> database where the
 database is in the SAMP schema, use the following command:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample -z samp</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests -z samp</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Specifying a remote database and host</h2>
-<p>If the <samp class="codeph">sample</samp> database is in the SAMP schema on
+<p>If the <samp class="codeph">tests</samp> database is in the SAMP schema on
 <samp class="codeph">localhost:1527</samp>, you must specify your user ID and password. For
 example, use the following command to write the DDL to the console:</p>
 
 <pre><strong>java org.apache.derby.tools.dblook
-   -d 'jdbc:derby://localhost:1527/"C:\temp\sample";
+   -d 'jdbc:derby://localhost:1527/"C:\temp\tests";
    user=someusername;password=somepassword' -z samp</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Specifying a schema and a table within the database in the
 dblook command</h2>
-<p>You can specify that only the objects in the <samp class="codeph">sample</samp> database
+<p>You can specify that only the objects in the <samp class="codeph">tests</samp> database
 that are associated with the SAMP and the <samp class="codeph">My Table</samp> table are
 written to the console. For example:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample -z samp -t "My Table"</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests -z samp -t "My Table"</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Specifying multiple tables in the dblook command</h2>
 <p>You can specify more than one table in the <samp class="codeph">dblook</samp> command by
 separating the names of the tables with a space. For example, for objects in the
-<samp class="codeph">sample</samp> database that are associated with either the
+<samp class="codeph">tests</samp> database that are associated with either the
 <samp class="codeph">My Table</samp> table or the <samp class="codeph">STAFF</samp> table, use the
 following command:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample -t "My Table" staff</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests -t "My Table" staff</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Writing DDL to a file without a statement delimiter</h2>
-<p>To write the DDL for all of the objects in the <samp class="codeph">sample</samp>
+<p>To write the DDL for all of the objects in the <samp class="codeph">tests</samp>
 database to the <samp class="codeph">myDB_DDL.sql</samp> file without a statement
 delimiter, you must omit the default semicolon. You can append the DDL to the
 output files if the files are already there. For example:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests
    -o myDB_DDL.sql -td '' -append</strong></pre>
 
 </div>
 
 <div class="example"><h2 class="sectiontitle">Excluding views from the DDL</h2>
 <p>To write the DDL to the console for all of the objects in the
-<samp class="codeph">sample</samp> database except for views, use the following
+<samp class="codeph">tests</samp> database except for views, use the following
 command:</p>
 
-<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:sample -noview</strong></pre>
+<pre><strong>java org.apache.derby.tools.dblook -d jdbc:derby:tests -noview</strong></pre>
 
 </div>
 

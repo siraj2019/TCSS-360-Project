@@ -74,7 +74,7 @@ down the database of the current connection if you specify the default connectio
 instead of a database name<em> </em>(within an SQL statement).</p>
 <pre><strong>// shutting down a database from your application</strong>
 DriverManager.getConnection(
-    "jdbc:derby:sample;shutdown=true");</pre>
+    "jdbc:derby:tests;shutdown=true");</pre>
 
 <p>If user authentication and SQL authorization are both enabled, only the
 database owner can shut down the database. (See the

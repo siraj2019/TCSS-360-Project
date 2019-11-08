@@ -26,8 +26,8 @@
 <meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
 <meta content="reference" name="DC.Type" />
 <meta name="DC.Title" content="Simple non-updatable result sets" />
-<meta name="abstract" content="This example is an excerpt from a sample JDBC application that generates a result set with a simple SELECT statement and then processes the rows." />
-<meta name="description" content="This example is an excerpt from a sample JDBC application that generates a result set with a simple SELECT statement and then processes the rows." />
+<meta name="abstract" content="This example is an excerpt from a tests JDBC application that generates a result set with a simple SELECT statement and then processes the rows." />
+<meta name="description" content="This example is an excerpt from a tests JDBC application that generates a result set with a simple SELECT statement and then processes the rows." />
 <meta scheme="URI" name="DC.Relation" content="cdevconcepts28351.html" />
 <meta scheme="URI" name="DC.Relation" content="cdevconcepts23987.html" />
 <meta scheme="URI" name="DC.Relation" content="cdevconcepts22641.html" />
@@ -46,12 +46,12 @@
 
 
 
-<div><p>This example is an excerpt from a sample JDBC application that
+<div><p>This example is an excerpt from a tests JDBC application that
 generates a result set with a simple SELECT statement and then processes
 the rows.</p>
 
 <div class="example"> <pre>Connection conn = DriverManager.getConnection(
-    "jdbc:derby:sample");
+    "jdbc:derby:tests");
 Statement s = conn.createStatement();
 s.execute("set schema 'SAMP'");
 <strong>//note that autocommit is on--it is on by default in JDBC</strong>

@@ -19,7 +19,7 @@
 
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Derby Network Server Simple sample program</title>
+<title>Derby Network Server Simple tests program</title>
 </head>
 
 <body>
@@ -61,7 +61,7 @@ from another JVM.</li>
  <li>Checks if the Derby Network Server is up and running</li>
  <li>Creates the database <tt>NSSimpleDB</tt> if not already created </li>
  <li>Obtains an embedded database connection</li>
- <li>Tests the database connection by executing a sample query</li>
+ <li>Tests the database connection by executing a tests query</li>
  <li>Allows client connections to connect to the server until the user decides to stop the server and exit the program</li>
  <li>Closes the connection</li>
  <li>Shuts down the Derby Network Server before exiting the program</li>
@@ -69,7 +69,7 @@ from another JVM.</li>
 
 <p>The following files are needed in the 
 <tt><i>DERBY_INSTALL</i>\demo\programs\nserverdemo\</span></tt> directory in
-order to run this sample program:</p>
+order to run this tests program:</p>
 
 <ul>
  <li>Source file: <br><tt>SimpleNetworkServerSample.java</tt></li>
@@ -78,7 +78,7 @@ order to run this sample program:</p>
 
 <h3>How to run the SimpleNetworkServerSample program</h3>
 
-<p>To run this simple Derby Network Server sample program:</p>
+<p>To run this simple Derby Network Server tests program:</p>
 
 <ol>
  <li>Open a command prompt and change directories to the <tt><i>DERBY_INSTALL</i>\demo\programs\nserverdemo\</tt>
@@ -108,7 +108,7 @@ Starting Network Server
 Testing if Network Server is up and running!
 Derby Network Server now running
 Got an embedded connection.
-Testing embedded connection by executing a sample query 
+Testing embedded connection by executing a tests query
 number of rows in sys.systables = 23
 
 While my app is busy with embedded work, ij might connect like this:
@@ -142,11 +142,11 @@ This log file contains Derby progress and error messages.
 <ol>
  <li>Obtains a client connection using the DriverManager</li>
  <li>Obtains a client connection using a DataSource</li>
- <li>Tests the database connections by executing a sample query</li>
+ <li>Tests the database connections by executing a tests query</li>
  <li>Closes the connections and then exits the program</li>
 </ol>
 
-<p>The following files should be installed in the <tt><i>DERBY_INSTALL</i>\demo\programs\nserverdemo\</tt> directory in order to run this sample program:</p>
+<p>The following files should be installed in the <tt><i>DERBY_INSTALL</i>\demo\programs\nserverdemo\</tt> directory in order to run this tests program:</p>
 <ul>
  <li>Source file: <br><tt>SimpleNetworkClientSample.java</tt></li>
  <li>Compiled class file: <br><tt>SimpleNetworkClientSample.class</tt></li>
@@ -184,9 +184,9 @@ Starting Sample client program <br>
 Got a client connection via the DriverManager.<br>
 connection from datasource; getDriverName = Apache Derby Network Client JDBC Driver<br>
 Got a client connection via a DataSource.<br>
-Testing the connection obtained via DriverManager by executing a sample query <br>
+Testing the connection obtained via DriverManager by executing a tests query <br>
 number of rows in sys.systables = 23<br>
-Testing the connection obtained via a DataSource by executing a sample query <br>
+Testing the connection obtained via a DataSource by executing a tests query <br>
 number of rows in sys.systables = 23<br>
 Goodbye!<br>
 </tt>

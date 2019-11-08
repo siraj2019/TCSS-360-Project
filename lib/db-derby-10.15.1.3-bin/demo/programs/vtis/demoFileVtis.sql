@@ -17,7 +17,7 @@
 
 ----------------------------------------------------------------------------------------
 --
--- This script demonstrates how to declare and use several sample
+-- This script demonstrates how to declare and use several tests
 -- table functions.
 --
 ----------------------------------------------------------------------------------------

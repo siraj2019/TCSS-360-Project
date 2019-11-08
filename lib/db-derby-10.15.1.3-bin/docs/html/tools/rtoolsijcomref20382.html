@@ -140,9 +140,9 @@ ij&gt; -- we create a new table in menuDB:
 ij&gt;<strong> disconnect;</strong>
 
 ij&gt; <strong>protocol 'jdbc:derby:';</strong>
-ij&gt; <strong>connect 'sample' as sample1;</strong>
+ij&gt; <strong>connect 'tests' as sample1;</strong>
 ij&gt; <strong>connect 'newDB;create=true' as newDB;</strong>
-SAMPLE1 -    jdbc:derby:sample
+SAMPLE1 -    jdbc:derby:tests
 NEWDB* -    jdbc:derby:newDB;create=true
 * = current connection
 ij(NEWDB)&gt; <strong>set connection sample1;</strong>

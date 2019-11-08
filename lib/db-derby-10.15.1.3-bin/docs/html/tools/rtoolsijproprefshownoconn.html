@@ -76,21 +76,21 @@ indicates the current connections, if any.</p>
 
 <div class="example"><h2 class="sectiontitle">Example</h2> 
 <p>In the following example, <samp class="codeph">ij</samp> connects to a previously
-created database named <samp class="codeph">sample</samp> using an
+created database named <samp class="codeph">tests</samp> using an
 <samp class="codeph">EmbeddedDataSource</samp>. The property
 <samp class="codeph">ij.showNoConnectionsAtStart</samp> is set to <samp class="codeph">true</samp> in
 the first session of the example and to <samp class="codeph">false</samp> in the
 second session.</p>
 
 <pre><strong>java -Dij.dataSource=org.apache.derby.jdbc.EmbeddedDataSource \
--Dij.dataSource.databaseName=sample -Dij.showNoConnectionsAtStart=true \
+-Dij.dataSource.databaseName=tests -Dij.showNoConnectionsAtStart=true \
 org.apache.derby.tools.ij</strong>
 ij version <span>10.15</span> 
 ij&gt; <strong>disconnect;</strong>
 ij&gt; <strong>exit;</strong>
 
 <strong>java -Dij.dataSource=org.apache.derby.jdbc.EmbeddedDataSource \
--Dij.dataSource.databaseName=sample -Dij.showNoConnectionsAtStart=false \
+-Dij.dataSource.databaseName=tests -Dij.showNoConnectionsAtStart=false \
 org.apache.derby.tools.ij</strong>
 ij version <span>10.15</span>  
 CONNECTION0*

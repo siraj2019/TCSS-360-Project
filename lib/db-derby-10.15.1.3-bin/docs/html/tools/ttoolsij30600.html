@@ -81,15 +81,15 @@ of 1000:</p>
 <samp class="codeph"><a href="rtoolsijpropref35032.html">ij.protocol</a></samp> of
 <samp class="codeph">jdbc:derby:</samp> and an
 <samp class="codeph"><a href="rtoolsijpropref28146.html">ij.database</a></samp> of
-<samp class="codeph">sample</samp>, use the following command:</p>
+<samp class="codeph">tests</samp>, use the following command:</p>
   
-<pre><strong><kbd class="userinput">java -Dij.protocol=jdbc:derby: -Dij.database=sample derbyrun.jar</kbd></strong></pre>
+<pre><strong><kbd class="userinput">java -Dij.protocol=jdbc:derby: -Dij.database=tests derbyrun.jar</kbd></strong></pre>
 
 <p>To start <samp class="codeph">ij</samp> with two named connections, using the
 <samp class="codeph"><a href="rtoolsijpropref10135.html">ij.connection.<em>connectionName</em></a></samp>
 property, use a command like the following:</p>
 
-<pre><strong>java -Dij.connection.sample=jdbc:derby:sample \
+<pre><strong>java -Dij.connection.tests=jdbc:derby:tests \
 -Dij.connection.History=jdbc:derby:History \
 -Dderby.system.home=c:\derby\demo\databases \
 -jar c:\derby\lib\derbyrun.jar</strong></pre>
@@ -101,7 +101,7 @@ appear with an asterisk (<samp class="codeph">*</samp>) after its name.)</p>
 <pre>ij version <span>10.15</span>
 ij(HISTORY)&gt; <strong><kbd class="userinput">show connections;</kbd></strong>
 HISTORY* -    jdbc:derby:History
-SAMPLE -     jdbc:derby:sample
+SAMPLE -     jdbc:derby:tests
 * = current connection
 ij(HISTORY)&gt;</pre>
 

@@ -86,15 +86,15 @@ characters (such as a space), it must be enclosed in double quotes.</p>
 </div>
 
 <div class="example"><h2 class="sectiontitle">Example</h2>
-<p>This example connects to the existing database <samp class="codeph">sample</samp> and
+<p>This example connects to the existing database <samp class="codeph">tests</samp> and
 creates, then connects to, the database <samp class="codeph">anotherDB</samp>.</p>
 
-<pre><strong>java -Dij.connection.sample1=jdbc:derby:sample \
+<pre><strong>java -Dij.connection.sample1=jdbc:derby:tests \
 -Dij.connection.anotherConn=jdbc:derby:anotherDB;create=true \
 org.apache.derby.tools.ij</strong>
 ij version <span>10.15</span>
 ANOTHERCONN* -  jdbc:derby:anotherDB;create=true
-SAMPLE1 -        jdbc:derby:sample
+SAMPLE1 -        jdbc:derby:tests
 * = current connection
 ij(ANOTHERCONN)&gt;</pre>
 

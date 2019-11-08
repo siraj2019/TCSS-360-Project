@@ -129,21 +129,21 @@ the prompt.</p>
 ij&gt; -- we create a new table in menuDB:
 <strong>CREATE TABLE menu(course CHAR(10), item CHAR(20), price INTEGER);</strong>
 ij&gt; <strong>protocol 'jdbc:derby:';</strong>
-ij&gt; <strong>connect 'sample' as sample1;</strong>
+ij&gt; <strong>connect 'tests' as sample1;</strong>
 ij(SAMPLE1)&gt; <strong>connect 'newDB;create=true' as newDB;</strong>
 ij(NEWDB)&gt; <strong>show connections;</strong>
 CONNECTION0 - jdbc:derby:menuDB
 NEWDB* - jdbc:derby:anotherDB
 SAMPLE1 - jdbc:derby:newDB
 ij&gt;
-ij&gt; <strong>connect 'jdbc:derby:sample' user 'sa' password 'cloud3x9';</strong>
+ij&gt; <strong>connect 'jdbc:derby:tests' user 'sa' password 'cloud3x9';</strong>
 ij&gt;</pre>
  
 <pre>ij&gt; <strong>protocol 'jdbc:derby:';</strong>
-ij&gt; <strong>connect 'memory:sample;create=true';</strong></pre>
+ij&gt; <strong>connect 'memory:tests;create=true';</strong></pre>
 
 <pre>ij&gt; <strong>protocol 'jdbc:derby:memory:';</strong>
-ij&gt; <strong>connect 'sample;create=true';</strong></pre>
+ij&gt; <strong>connect 'tests;create=true';</strong></pre>
 
 </div>
 

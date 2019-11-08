@@ -61,7 +61,7 @@
 
 <div class="section"><h2 class="sectiontitle">Example: Importing all data from a file</h2>
 <p>The following example shows how to import data into the STAFF table in a
-sample database from the <samp class="codeph">myfile.del</samp> file. The data will be
+tests database from the <samp class="codeph">myfile.del</samp> file. The data will be
 appended to the existing data in the table.</p>
 
 <pre><strong>CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE( 
@@ -71,7 +71,7 @@ appended to the existing data in the table.</p>
 
 <div class="section"><h2 class="sectiontitle">Example: Importing all data from a delimited file</h2>
 <p>The following example shows how to import data into the STAFF table in a
-sample database from a delimited data file, <samp class="codeph">myfile.del</samp>. This
+tests database from a delimited data file, <samp class="codeph">myfile.del</samp>. This
 example defines the percentage character (<samp class="codeph">%</samp>) as the string
 delimiter, and a semicolon as the column delimiter. The data will be appended to
 the existing data in the table.</p>
@@ -84,7 +84,7 @@ the existing data in the table.</p>
 <div class="section"><h2 class="sectiontitle">Example: Importing all data from a table, using a separate
 import file for the LOB data</h2>
 <p>The following example shows how to import data into the STAFF table in a
-sample database from a delimited data file, <samp class="codeph">staff.del</samp>. The
+tests database from a delimited data file, <samp class="codeph">staff.del</samp>. The
 import file <samp class="codeph">staff.del</samp> is the main import file and contains
 references that point to a separate file which contains the LOB data. This
 example specifies a comma as the column delimiter. The data will be appended to
@@ -98,7 +98,7 @@ the existing data in the table.</p>
 <div class="section"><h2 class="sectiontitle">Example: Importing data into specific columns, using a separate
 import file for the LOB data</h2>
 <p>The following example shows how to import data into several columns of the
-STAFF table. The STAFF table includes a LOB column in a sample database. The
+STAFF table. The STAFF table includes a LOB column in a tests database. The
 import file, <samp class="codeph">staff.del</samp>, is a delimited data file. The
 <samp class="codeph">staff.del</samp> file contains references that point to a separate
 file which contains the LOB data. The data in the import file is formatted using
@@ -115,7 +115,7 @@ existing data in the STAFF table.</p>
 <div class="section"><h2 class="sectiontitle">Example: Exporting all data from a table to a single export
 file</h2>
 <p>The following example shows how to export data from the STAFF table in a
-sample database to the file <samp class="codeph">myfile.del</samp>.</p>
+tests database to the file <samp class="codeph">myfile.del</samp>.</p>
 
 <pre><strong>CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE(
     null,'STAFF','myfile.del',null,null,null);</strong></pre>
@@ -137,7 +137,7 @@ delimiter from the STAFF table.</p>
 <div class="section"><h2 class="sectiontitle">Example: Exporting all data from a table, using a separate
 export file for the LOB data</h2>
 <p>The following example shows how to export data from the STAFF table in a
-sample database to the main file, <samp class="codeph">staff.del</samp>, and the LOB export
+tests database to the main file, <samp class="codeph">staff.del</samp>, and the LOB export
 file, <samp class="codeph">pictures.dat</samp>.</p>
 
 <pre><strong>CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE_LOBS_TO_EXTFILE(null,'STAFF',
@@ -148,7 +148,7 @@ file, <samp class="codeph">pictures.dat</samp>.</p>
 <div class="section"><h2 class="sectiontitle">Example: Exporting data from a query to a single export
 file</h2>
 <p>The following example shows how to export employee data in department 20 from
-the STAFF table in a sample database to the file
+the STAFF table in a tests database to the file
 <samp class="codeph">awards.del</samp>.</p>
 
 <pre><strong>CALL SYSCS_UTIL.SYSCS_EXPORT_QUERY(
@@ -160,7 +160,7 @@ the STAFF table in a sample database to the file
 <div class="section"><h2 class="sectiontitle">Example: Exporting data from a query, using a separate export
 file for the LOB data </h2>
 <p>The following example shows how to export employee data in department 20 from
-the STAFF table in a sample database to the main file,
+the STAFF table in a tests database to the main file,
 <samp class="codeph">staff.del</samp>, and the LOB data to the file
 <samp class="codeph">pictures.dat</samp>.</p>
 
