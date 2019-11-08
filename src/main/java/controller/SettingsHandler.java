@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import main.java.model.Setting;
 
-import java.util.Iterator;
-
 public class SettingsHandler {
 
     private ObservableSet<Setting> settingList ;
@@ -19,12 +17,11 @@ public class SettingsHandler {
         settingList.add(setting);
     }
 
-    public void updateSetting(Setting setting, String value) {
-        for (Iterator<Setting> it = this.settingList.iterator(); it.hasNext();
+    public void updateSetting(Setting setting, String newValue) {
+        for (Setting settingInSet: this.settingList
              ) {
-            Setting settingInSet = it.next();
             if (setting.equals(settingInSet)) {
-                settingInSet.setValue(value);
+                settingInSet.setValue(newValue);
             }
         }
     }
@@ -34,5 +31,7 @@ public class SettingsHandler {
         return settingList;
     }
 
+    //TODO: Create method to export settingsList to a JSON file.
 
+    //TODO: Create method to overwrite settingsList with settings from JSON file.
 }

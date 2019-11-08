@@ -1,19 +1,12 @@
 package main.java.ui;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class MainUI extends Application {
 
@@ -96,19 +89,28 @@ public class MainUI extends Application {
 
     private void initRootLayout() {
         try {
-            // Load xml layout into rootLayout pane
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("rootBorder.fxml"));
-            rootBorder = loader.load();
+            //Load xml layout into rootLayout pane
+            //FXMLLoader loader = new FXMLLoader();
+            //loader.setLocation(getClass().getResource("/resources/fxml/rootBorder.fxml"));
+            //rootBorder = loader.load();
+            rootBorder = new BorderPane();
+
 
             // Creates a scene from the root layout pane and add it to the main scene
             Scene scene = new Scene(rootBorder);
             primaryStage.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
+
+    }
+
+    private void initRootBorder() {
+        this.rootBorder.setPrefHeight(600);
+        this.rootBorder.setPrefWidth(800);
+        this.rootBorder.setMinHeight(600);
+        this.rootBorder.setMinWidth(800);
     }
 
     private void initMainMenu() {

@@ -2,11 +2,10 @@ package main.java.model;
 
 import java.util.UUID;
 
-public class Setting {
+public class Setting implements Comparable<Setting> {
     private UUID ID;
     private String name;
     private String value;
-    private String description;
     private boolean exportable;
 
     public Setting(String name, String value) {
@@ -40,7 +39,7 @@ public class Setting {
     }
 
     public String getValue() {
-        return "Default Value";
+        return this.value;
     }
 
     public void setValue(String value) {
@@ -53,5 +52,10 @@ public class Setting {
 
     public void setExportable(boolean exportable) {
         this.exportable = exportable;
+    }
+
+    @Override
+    public int compareTo(Setting o) {
+        return this.ID.compareTo(o.getID());
     }
 }

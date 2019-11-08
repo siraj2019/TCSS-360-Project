@@ -7,11 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import main.java.controller.Controllers;
 import main.java.controller.SettingsHandler;
 import main.java.model.Setting;
 
@@ -23,9 +24,9 @@ public class SettingsUI extends Application implements MenuItemInterface {
     @Override
     public void start(Stage primaryStage) {
 
-        this.settingsHandler = new SettingsHandler();
+        this.settingsHandler = Controllers.settingsHandler;
         primaryStage.setTitle("Settings");
-        StackPane settingsPane = new StackPane();
+        BorderPane settingsPane = new BorderPane();
 
         Label label = new Label("This is the settings section.");
 
@@ -38,8 +39,10 @@ public class SettingsUI extends Application implements MenuItemInterface {
 
         Scene scene = new Scene(settingsPane, 300, 500);
 
-        // Add About popup to main scene.
+        // Add Settings list to popup
         initSettingsPane(settingsPane);
+
+        initBottomPane(settingsPane);
 
         // Launches main UI screen
         primaryStage.setScene(scene);
@@ -47,7 +50,7 @@ public class SettingsUI extends Application implements MenuItemInterface {
 
     }
 
-    private void initSettingsPane(StackPane rootPane) {
+    private void initSettingsPane(BorderPane rootPane) {
         Text textBlock = new Text("Settings Text");
         settingsHandler.addSetting(new Setting("TEST1", "VAL1"));
         System.out.println( settingsHandler.getSettings().isEmpty());
@@ -63,7 +66,7 @@ public class SettingsUI extends Application implements MenuItemInterface {
 
             ListView<GridPane> settingsList = new ListView<GridPane>(panes);
             settingsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            rootPane.getChildren().add(settingsList);
+            rootPane.setCenter(settingsList);
 
 
 
@@ -71,6 +74,15 @@ public class SettingsUI extends Application implements MenuItemInterface {
             textBlock.setText(e.getMessage());
             rootPane.getChildren().add(textBlock);
         }
+    }
+
+    private void initBottomPane(BorderPane rootPane){
+        ButtonBar buttonBar = new ButtonBar();
+        Button importSettingsButton = new Button("Import");
+        Button exportSettingsButton = new Button("Export");
+        buttonBar.getButtons().addAll(importSettingsButton, exportSettingsButton);
+
+        rootPane.setBottom(buttonBar);
     }
 
     public void initMenu(Menu rootMenu) {
