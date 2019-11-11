@@ -1,11 +1,14 @@
 package main.java.ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import main.java.controller.Controllers;
 import main.java.model.Setting;
 
 import java.util.UUID;
@@ -17,8 +20,9 @@ public class SettingsUIElement {
     private String value;
     private String description;
     private boolean readonly;
-
+    private Setting setting;
     private GridPane pane;
+
 
     // https://stackoverflow.com/questions/43877557/the-correct-way-to-handle-and-extend-node-in-javafx
     public SettingsUIElement(String name, String value) {
@@ -32,6 +36,7 @@ public class SettingsUIElement {
         this.ID = UUID.randomUUID();
         this.name = setting.getName();
         this.value = setting.getValue();
+        this.setting = setting;
         initUIElement();
     }
 
@@ -62,12 +67,40 @@ public class SettingsUIElement {
 
         this.pane = grid;
 
+        /*
+        labelValue.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(!(t1.equals(setting.getValue()))){
+                    updateSetting(setting, t1);
+                } else {
+                    System.out.println("Already matched text:" + t1 + "=" + setting.getValue());
+                }
+            }
+        });*/
+
+        labelValue.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                String tempValue = labelValue.getText();
+
+                if(aBoolean) {
+                    System.out.println("unfocused");
+                    if(!(tempValue.equals(setting.getValue()))){
+                        updateSetting(setting, tempValue);
+                    } else {
+                        System.out.println("Already matched:" + tempValue + "=" + setting.getValue());
+                    }
+                }
+            }
+        });
+
         this.pane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                                        @Override
-                                        public void handle(MouseEvent mouseEvent) {
-                                            pane.setStyle("-fx-background-color:#dae7f3;");
-                                        }
-                                    }
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                pane.setStyle("-fx-background-color:#dae7f3;");
+            }
+        }
         );
 
         this.pane.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -77,6 +110,13 @@ public class SettingsUIElement {
                                        }
                                    }
         );
+    }
+
+
+
+    private void updateSetting(Setting setting, String newValue) {
+        Controllers.settingsHandler.updateSetting(setting,newValue);
+        Controllers.settingsHandler.getSettings().forEach(setting1 -> System.out.println(setting1.toString()));
     }
 
     public GridPane asPane() {

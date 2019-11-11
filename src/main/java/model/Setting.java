@@ -58,4 +58,9 @@ public class Setting implements Comparable<Setting> {
     public int compareTo(Setting o) {
         return this.ID.compareTo(o.getID());
     }
+
+    @Override
+    public String toString() {
+        return "Setting:" + this.name + "=" + this.value;
+    }
 }

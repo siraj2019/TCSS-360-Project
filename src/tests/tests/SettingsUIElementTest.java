@@ -1,5 +1,6 @@
-package main.java.ui;
+package tests;
 
+import main.java.ui.SettingsUIElement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

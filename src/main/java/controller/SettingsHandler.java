@@ -10,6 +10,8 @@ public class SettingsHandler {
 
     public SettingsHandler() {
         this.settingList = FXCollections.observableSet();
+        addSetting(new Setting("Username", ""));
+        addSetting(new Setting("Email", ""));
     }
 
     //https://www.tutorialspoint.com/java/util/observable_addobserver.htm

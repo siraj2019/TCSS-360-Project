@@ -1,6 +1,7 @@
 package main.java.ui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.BorderPane;
@@ -46,6 +47,7 @@ public class MainUI extends Application {
         //Creates a frame in the primary stage
         initRootLayout();
 
+
         // Main Menu.
         // Must be before any element that adds a menu item.
         initMainMenu();
@@ -90,10 +92,12 @@ public class MainUI extends Application {
     private void initRootLayout() {
         try {
             //Load xml layout into rootLayout pane
-            //FXMLLoader loader = new FXMLLoader();
-            //loader.setLocation(getClass().getResource("/resources/fxml/rootBorder.fxml"));
-            //rootBorder = loader.load();
-            rootBorder = new BorderPane();
+
+            FXMLLoader loader = new FXMLLoader();
+            //loader.setLocation(getClass().getResource("/resources/fxml/MainScreen.fxml"));
+            loader.setLocation(getClass().getResource("/resources/fxml/rootBorder.fxml"));
+            rootBorder = loader.load();
+            //rootBorder = new BorderPane();
 
 
             // Creates a scene from the root layout pane and add it to the main scene
