@@ -2,6 +2,7 @@ package main.java.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+
 import main.java.model.Setting;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
