@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/TCSS-360-Project/src"/>
+	<classpathentry kind="src" path="/TCSS-360-Project/src/tests"/>
+	<classpathentry kind="src" path="/TCSS-360-Project/lib"/>
+	<classpathentry kind="src" path="/TCSS-360-Project/src/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/db-derby-10.15.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
+	<classpathentry kind="lib" path="/TCSS-360-Project/lib/Junit/junit-jupiter-5.4.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Junit"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSON"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
