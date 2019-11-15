@@ -24,6 +24,11 @@ public class SettingsHandler {
         addSetting(new Setting("Email", ""));
     }
 
+    // Maintains a list of all settings.
+    public ObservableSet<Setting> getSettings() {
+        return settingList;
+    }
+
     //https://www.tutorialspoint.com/java/util/observable_addobserver.htm
     public void addSetting(Setting setting) {
         settingList.add(setting);
@@ -38,10 +43,7 @@ public class SettingsHandler {
         }
     }
 
-    // Maintains a list of all settings.
-    public ObservableSet<Setting> getSettings() {
-        return settingList;
-    }
+
 
     //TODO: Create method to export settingsList to a JSON file.
 

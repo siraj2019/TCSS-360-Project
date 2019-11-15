@@ -9,6 +9,10 @@ public class Folder extends FileEntity {
     private String name;
     private HashSet<FileEntity> contents;
 
+    public Folder(String name, Folder parent) {
+        super(name, parent);
+    }
+
     public void add(FileEntity entity) {
         this.contents.add(Objects.requireNonNull(entity));
     }
