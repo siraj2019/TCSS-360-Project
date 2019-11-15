@@ -14,6 +14,14 @@ public class FileEntity {
         this.ID = UUID.randomUUID();
     }
 
+    public void setID(UUID id) {
+
+    }
+
+    public void setID(String id) {
+        this.ID = UUID.fromString(id);
+    }
+
     public String getName() {
         return name;
     }

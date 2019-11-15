@@ -7,6 +7,7 @@ public class Tag {
     private UUID ID;
     private String name;
     private Object value;
+    private String Type;
 
     public UUID getID() {
         return ID;
