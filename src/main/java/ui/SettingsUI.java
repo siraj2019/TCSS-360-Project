@@ -3,6 +3,7 @@ package main.java.ui;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,6 +16,11 @@ import javafx.stage.Stage;
 import main.java.controller.Controllers;
 import main.java.controller.SettingsHandler;
 import main.java.model.Setting;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import java.io.IOException;
 
 
 public class SettingsUI extends Application implements MenuItemInterface {
@@ -59,13 +65,18 @@ public class SettingsUI extends Application implements MenuItemInterface {
                  ) {
                 SettingsUIElement element = new SettingsUIElement(setting);
                 panes.add(element.asPane());
-                System.out.println(element.toString());;
             }
 
             ListView<GridPane> settingsList = new ListView<GridPane>(panes);
             settingsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             rootPane.setCenter(settingsList);
 
+            this.settingsHandler.getSettings().addListener(new SetChangeListener<Setting>() {
+                @Override
+                public void onChanged(Change<? extends Setting> change) {
+                    //TODO: update settingslist on settings change.
+                }
+            });
 
 
         } catch (Exception e) {
@@ -79,6 +90,42 @@ public class SettingsUI extends Application implements MenuItemInterface {
         Button importSettingsButton = new Button("Import");
         Button exportSettingsButton = new Button("Export");
         buttonBar.getButtons().addAll(importSettingsButton, exportSettingsButton);
+
+        importSettingsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                JFileChooser settingFile = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Settings JSON Files", "json");
+                settingFile.setFileFilter(filter);
+                int openedFile = settingFile.showOpenDialog(null);
+                if (openedFile == JFileChooser.APPROVE_OPTION) {
+                    Controllers.settingsHandler.readSettings(settingFile.getSelectedFile());
+                }
+
+            }
+        });
+
+        exportSettingsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                JFileChooser settingFile = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Settings JSON Files", "json");
+                settingFile.setFileFilter(filter);
+                int openedFile = settingFile.showSaveDialog(null);
+                if (openedFile == JFileChooser.APPROVE_OPTION) {
+                    File toWrite = settingFile.getSelectedFile();
+                    if (!settingFile.getSelectedFile().toString().endsWith(".json")) {
+                        toWrite = new File(settingFile.getSelectedFile().toString() + ".json");
+                    }
+                    try {
+                        toWrite.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Controllers.settingsHandler.writeSettings(toWrite);
+                }
+            }
+        });
 
         rootPane.setBottom(buttonBar);
     }

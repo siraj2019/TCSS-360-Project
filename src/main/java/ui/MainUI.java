@@ -47,6 +47,9 @@ public class MainUI extends Application {
         //Creates a frame in the primary stage
         initRootLayout();
 
+        // Main doc view pane
+        initDocumentView();
+
 
         // Main Menu.
         // Must be before any element that adds a menu item.
@@ -123,8 +126,9 @@ public class MainUI extends Application {
         this.mainMenu = menu;
     }
 
-    private void initMenu(Menu rootMenu) {
-
+    private void initDocumentView() {
+        ViewUI viewUI = new ViewUI();
+        viewUI.start(this.rootBorder);
     }
 }
 

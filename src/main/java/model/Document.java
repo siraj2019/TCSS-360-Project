@@ -9,6 +9,12 @@ public class Document extends FileEntity {
     private File file;
     private HashSet<Tag> tags;
 
+    public Document(String name, File file, Folder parent) {
+        super(name, parent);
+        this.file = file;
+        this.tags = new HashSet<Tag>();
+    }
+
     public File getFile() {
         return file;
     }

@@ -22,6 +22,13 @@ public class Setting implements Comparable<Setting> {
         this.exportable = exportable;
     }
 
+    public Setting(UUID id, String name, String value, boolean exportable) {
+        this.ID = id;
+        this.name = name;
+        this.value = value;
+        this.exportable = exportable;
+    }
+
     public UUID getID() {
         return ID;
     }
