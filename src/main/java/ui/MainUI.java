@@ -72,14 +72,19 @@ public class MainUI extends Application {
             this.mainMenu.addMenu(menu);
         }
 
+        new HelpMenuUI(helpMenu);
+        new FileMenuUI(fileMenu);
 
+        /*
         // Creates About Popup.
         AboutUI about = new AboutUI();
         about.initMenu(helpMenu);
 
+
         // Creates Settings Popup.
         SettingsUI settings = new SettingsUI();
         settings.initMenu(fileMenu);
+        */
 
 
         primaryStage.show();
