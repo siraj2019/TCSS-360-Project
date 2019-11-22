@@ -14,8 +14,7 @@ public class ViewHandler {
         this.entitySet = FXCollections.observableSet();
         Setting colSetting = Controllers.settingsHandler.getSetting("Columns");
         if(colSetting.getType() == ObservableSet.class) {
-            assert colSetting.getType() = ObservableSet.class;
-            this.tagSet=colSetting.getType().cast(colSetting.getValue());
+            this.tagSet= (ObservableSet<Tag>) colSetting.getType().cast(colSetting.getValue());
         }
 
     }
