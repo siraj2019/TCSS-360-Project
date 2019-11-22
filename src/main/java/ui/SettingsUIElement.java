@@ -35,7 +35,7 @@ public class SettingsUIElement {
     public SettingsUIElement(Setting setting) {
         this.ID = UUID.randomUUID();
         this.name = setting.getName();
-        this.value = setting.getValue();
+        this.value = setting.getValue().toString();
         this.setting = setting;
         initUIElement();
     }

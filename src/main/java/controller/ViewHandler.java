@@ -1,15 +1,22 @@
 package main.java.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import main.java.model.FileEntity;
-import main.java.model.Filter;
-
-import java.util.HashSet;
 
 public class ViewHandler {
-    private HashSet<FileEntity> entitySet;
-    private HashSet<Filter> filterSet;
+    private ObservableSet<FileEntity> entitySet;
+
+    public ViewHandler() {
+        this.entitySet = FXCollections.observableSet();
+    }
+
+    public ObservableSet<FileEntity> getEntitySet() {
+        return entitySet;
+    }
 
     //TODO: update current folder in folder tree
+
 
     //TODO: Update view when folder entered
 

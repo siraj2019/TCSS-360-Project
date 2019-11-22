@@ -15,7 +15,7 @@ class SettingsHandlerTest {
     @BeforeEach
     void setUp() {
         this.handler = new SettingsHandler();
-        setting0 = new Setting("TEST", "VAL1");
+        setting0 = new Setting("TEST", "VAL1", String.class);
     }
 
     @Test

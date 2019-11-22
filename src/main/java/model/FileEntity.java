@@ -1,31 +1,74 @@
 package main.java.model;
 
+import main.java.controller.Controllers;
+
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class FileEntity {
-    private UUID ID;
+    private UUID id;
     private String name;
     private Folder parentFolder;
+    protected HashSet<Tag> tags;
 
     public FileEntity(String name, Folder parent) {
+        this.generateId();
         this.name = name;
         this.parentFolder = parent;
+        this.tags = new HashSet<Tag>();
+        this.setTags(Controllers.tagHandler.getTagSetRequiredFileEntity());
     }
 
-    public UUID getID() {
-        return ID;
+    public FileEntity(String name, Folder parent, UUID id) {
+        this.id = id;
+        this.name = name;
+        this.parentFolder = parent;
+        this.tags = new HashSet<Tag>();
+        this.setTags(Controllers.tagHandler.getTagSetRequiredFileEntity());
     }
 
-    public void generateID() {
-        this.ID = UUID.randomUUID();
+    protected void initTags() {
+        this.getTag("Name").setValue(this.name);
+        this.getTag("Root Folder").setValue(this.parentFolder);
     }
 
-    public void setID(UUID id) {
+    public HashSet<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(Objects.requireNonNull(tag));
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(Objects.requireNonNull(tag));
+    }
+
+    public Tag getTag(String name){
+        Stream<Tag> filter = this.tags.stream().filter(t -> t.getName().compareToIgnoreCase(name)==0);
+        return filter.findFirst().get();
+    }
+
+    public void setTags(HashSet<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void generateId() {
+        this.id = UUID.randomUUID();
+    }
+
+    public void setId(UUID id) {
 
     }
 
-    public void setID(String id) {
-        this.ID = UUID.fromString(id);
+    public void setId(String id) {
+        this.id = UUID.fromString(id);
     }
 
     public String getName() {
@@ -34,5 +77,12 @@ public class FileEntity {
 
     public void setName(String name) {
         this.name = name;
+        this.getTag("Name").setValue(this.name);
     }
+
+    @Override
+    public String toString() {
+        return "Entity" + this.getName();
+    }
+
 }

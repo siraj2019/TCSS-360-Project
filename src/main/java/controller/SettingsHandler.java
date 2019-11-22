@@ -2,7 +2,6 @@ package main.java.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-
 import main.java.model.Setting;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,13 +19,23 @@ public class SettingsHandler {
 
     public SettingsHandler() {
         this.settingList = FXCollections.observableSet();
-        addSetting(new Setting("Username", ""));
-        addSetting(new Setting("Email", ""));
+        addSetting(new Setting("Username", "", String.class));
+        addSetting(new Setting("Email", "", String.class));
+        addSetting(new Setting("Columns", FXCollections.observableSet("File Name") , ObservableSet.class) {});
     }
 
     // Maintains a list of all settings.
     public ObservableSet<Setting> getSettings() {
         return settingList;
+    }
+
+    public Setting getSetting(String name) {
+        for(Setting s : this.settingList) {
+            if (s.compareByName(name) == 0) {
+                return s;
+            }
+        }
+        return null;
     }
 
     //https://www.tutorialspoint.com/java/util/observable_addobserver.htm
@@ -86,7 +95,13 @@ public class SettingsHandler {
 
             //Iterate over product array
             this.settingList.clear();
-            productList.forEach( pro -> parseJSONSetting( (JSONObject) pro ) );
+            productList.forEach( pro -> {
+                try {
+                    parseJSONSetting( (JSONObject) pro );
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            });
 
 
         } catch (IOException | org.json.simple.parser.ParseException e) {
@@ -94,8 +109,7 @@ public class SettingsHandler {
         }
     }
 
-    private void parseJSONSetting(JSONObject product)
-    {
+    private void parseJSONSetting(JSONObject product) throws ClassNotFoundException {
         //Get product object within list
         JSONObject productObject = (JSONObject) product.get("product");
 
@@ -107,9 +121,13 @@ public class SettingsHandler {
         String Name = (String) productObject.get("name");
         System.out.println(Name);
 
+        // Get setting class
+        Class type = Class.forName((String) productObject.get("type"));
+
         //Get product value name
-        String value = (String) productObject.get("value");
+        Object value = (String) productObject.get("value");
         System.out.println(value);
+
 
 //        //Get product description name
 //        String desc = (String) productObject.get("description");
@@ -121,9 +139,9 @@ public class SettingsHandler {
         System.out.println(export);
 
         try {
-            this.addSetting(new Setting(UUID.fromString(id), Name, value, exportBool));
+            this.addSetting(new Setting(UUID.fromString(id), Name, value, type, exportBool));
         } catch (IllegalArgumentException e) {
-            this.addSetting(new Setting(Name, value, exportBool));
+            this.addSetting(new Setting(Name, value, type, exportBool));
         } catch (Exception e) {
             e.printStackTrace();
         }
