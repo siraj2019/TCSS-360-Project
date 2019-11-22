@@ -8,13 +8,13 @@ import main.java.model.Tag;
 
 public class ViewHandler {
     private ObservableSet<FileEntity> entitySet;
-    private ObservableSet<Tag> tagSet;
+    private ObservableSet<Tag> columnTagSet;
 
     public ViewHandler() {
         this.entitySet = FXCollections.observableSet();
         Setting colSetting = Controllers.settingsHandler.getSetting("Columns");
         if(colSetting.getType() == ObservableSet.class) {
-            this.tagSet= (ObservableSet<Tag>) colSetting.getType().cast(colSetting.getValue());
+            this.columnTagSet = (ObservableSet<Tag>) colSetting.getValue();
         }
 
     }

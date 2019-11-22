@@ -2,7 +2,6 @@ package main.java.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import main.java.model.Folder;
 import main.java.model.Tag;
 
 import java.io.File;
@@ -25,13 +24,13 @@ public class TagHandler {
         this.tagSetRequiredFileEntity = new HashSet<Tag>();
 
         // Tags added below here will be assigned to the following sets:
-        requiredTagSet.add(new Tag("Name", null, String.class));
-        requiredTagSet.add(new Tag("Root Folder", null, Folder.class));
+        requiredTagSet.add(new Tag<String>("Name", null));
+        requiredTagSet.add(new Tag<String>("Root Folder", null));
         // Tags added above here will be added to the required tags for File Entities
         this.tagSetRequiredFileEntity.addAll(requiredTagSet);
 
-        requiredTagSet.add(new Tag("File", null, File.class));
-        requiredTagSet.add(new Tag("CreatedDate", null, Date.class));
+        requiredTagSet.add(new Tag<File>("File", null));
+        requiredTagSet.add(new Tag<Date>("CreatedDate", null));
         // Tags added above here will be added to the required tags for Documents
         this.tagSetRequiredDocument.addAll(Objects.requireNonNull(this.requiredTagSet));
 

@@ -19,10 +19,11 @@ public class SettingsHandler {
 
     public SettingsHandler() {
         this.settingList = FXCollections.observableSet();
-        addSetting(new Setting("Username", "", String.class));
-        addSetting(new Setting("Email", "", String.class));
-        addSetting(new Setting("Columns", FXCollections.observableSet() , ObservableSet.class) {});
+        addSetting(new Setting<String>("Username", ""));
+        addSetting(new Setting<String>("Email", ""));
+        addSetting(new Setting<ObservableSet>("Columns", FXCollections.observableSet()) {});
     }
+
 
     // Maintains a list of all settings.
     public ObservableSet<Setting> getSettings() {
@@ -124,9 +125,6 @@ public class SettingsHandler {
         String Name = (String) productObject.get("name");
         System.out.println(Name);
 
-        // Get setting class
-        Class type = Class.forName((String) productObject.get("type"));
-
         //Get product value name
         Object value = (String) productObject.get("value");
         System.out.println(value);
@@ -142,9 +140,9 @@ public class SettingsHandler {
         System.out.println(export);
 
         try {
-            this.addSetting(new Setting(UUID.fromString(id), Name, value, type, exportBool));
+            this.addSetting(new Setting(UUID.fromString(id), Name, value, exportBool));
         } catch (IllegalArgumentException e) {
-            this.addSetting(new Setting(Name, value, type, exportBool));
+            this.addSetting(new Setting(Name, value, exportBool));
         } catch (Exception e) {
             e.printStackTrace();
         }

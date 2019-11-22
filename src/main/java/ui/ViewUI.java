@@ -12,8 +12,11 @@ import javafx.scene.layout.BorderPane;
 import main.java.controller.Controllers;
 import main.java.controller.DocumentHandler;
 import main.java.model.Document;
+import main.java.model.FileEntity;
 import main.java.model.Setting;
+import main.java.model.Tag;
 
+import java.io.File;
 import java.io.InvalidClassException;
 
 /**
@@ -23,13 +26,13 @@ public class ViewUI{
 
     private DocumentHandler docHandler;
     private TableView<Document> viewList;
-    private ObservableSet<String> colNames;
+    private ObservableSet<Tag> colTags;
     private ObservableSet<TableColumn> colSet;
     private Document selectedDocument;
 
     public void start(BorderPane rootPane) {
         this.docHandler = Controllers.documentHandler;
-        this.colNames = FXCollections.observableSet();
+        this.colTags = FXCollections.observableSet();
         this.colSet = FXCollections.observableSet();
         this.selectedDocument = null;
         this.initDocList(rootPane);
@@ -37,11 +40,15 @@ public class ViewUI{
 
     private void initDocList(BorderPane rootPane) {
         try{
-            viewList = new TableView<Document>(docHandler.getDocuments());
-            this.getColumns();
+            viewList = new TableView<Document>();
+
             rootPane.setCenter(viewList);
 
             // Sets Col names
+            this.setColumns();
+            this.updateColumns();
+
+            viewList.setItems(docHandler.getDocuments());
 
             // Only select a single document at a time
             viewList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -67,22 +74,28 @@ public class ViewUI{
         }
     }
 
-    public void getColumns() throws InvalidClassException {
-        Setting settingColumns = Controllers.settingsHandler.getSetting("Columns");
-        if(settingColumns.getType() != ObservableSet.class) {
-            throw new InvalidClassException("Expected Setting ObservableSet class, was " + settingColumns.getType());
+    public void setColumns() throws InvalidClassException {
+        Setting<ObservableSet> settingColumns = Controllers.settingsHandler.getSetting("Columns");
+        if (settingColumns.getValue().isEmpty()) {
+            settingColumns.getValue().addAll(Controllers.tagHandler.getTagSetRequiredFileEntity());
         }
-        this.colNames = (ObservableSet<String>) settingColumns.getValue();
+        this.colTags = (ObservableSet<Tag>) settingColumns.getValue();
     }
 
     public void updateColumns() {
-        for (String s : this.colNames
-             ) {
-            TableColumn newCol = new TableColumn(s);
-            newCol.setCellValueFactory(
-                    new PropertyValueFactory<>(s)
-            );
-            this.colSet.add(newCol);
-        }
+
+        // Name Column
+        TableColumn nameColumn = new TableColumn("Name");
+        nameColumn.setCellValueFactory(
+                new PropertyValueFactory<FileEntity,String>("name")
+        );
+        viewList.getColumns().add(nameColumn);
+
+        // File Column
+        TableColumn fileColumn = new TableColumn("File");
+        fileColumn.setCellValueFactory(
+                new PropertyValueFactory<FileEntity, File>("file")
+        );
+        viewList.getColumns().add(fileColumn);
     }
 }

@@ -1,5 +1,9 @@
 package main.java.model;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import main.java.controller.Controllers;
 
 import java.util.HashSet;
@@ -78,6 +82,75 @@ public class FileEntity {
     public void setName(String name) {
         this.name = name;
         this.getTag("Name").setValue(this.name);
+    }
+
+    public Property nameProperty() {
+        return new Property() {
+            @Override
+            public void bind(ObservableValue observableValue) {
+
+            }
+
+            @Override
+            public void unbind() {
+
+            }
+
+            @Override
+            public boolean isBound() {
+                return false;
+            }
+
+            @Override
+            public void bindBidirectional(Property property) {
+
+            }
+
+            @Override
+            public void unbindBidirectional(Property property) {
+
+            }
+
+            @Override
+            public Object getBean() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "name";
+            }
+
+            @Override
+            public void addListener(ChangeListener changeListener) {
+
+            }
+
+            @Override
+            public void removeListener(ChangeListener changeListener) {
+
+            }
+
+            @Override
+            public Object getValue() {
+                return name;
+            }
+
+            @Override
+            public void addListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void removeListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void setValue(Object o) {
+                this.setValue(o);
+            }
+        };
     }
 
     @Override

@@ -1,35 +1,32 @@
 package main.java.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
-public class Setting implements Comparable<Setting> {
+public class Setting<T> implements Comparable<Setting> {
     private UUID ID;
     private String name;
-    private Object value;
-    private Class type;
+    private T value;
     private boolean exportable;
 
-    public Setting(String name, Object value, Class type) {
+    public Setting(String name, T value) {
         generateID();
         this.name = name;
         this.value = value;
-        this.type = type;
         this.exportable = true;
     }
 
-    public Setting(String name, Object value, Class type, boolean exportable) {
+    public Setting(String name, T value, boolean exportable) {
         generateID();
         this.name = name;
         this.value = value;
-        this.type = type;
         this.exportable = exportable;
     }
 
-    public Setting(UUID id, String name, Object value, Class type, boolean exportable) {
+    public Setting(UUID id, String name, T value, boolean exportable) {
         this.ID = id;
         this.name = name;
         this.value = value;
-        this.type = type;
         this.exportable = exportable;
     }
 
@@ -49,13 +46,13 @@ public class Setting implements Comparable<Setting> {
         this.name = name;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return this.value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(T value) {
         try{
-            this.value = type.cast(value);
+            this.value = Objects.requireNonNull(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +61,7 @@ public class Setting implements Comparable<Setting> {
 
 
     public Class getType() {
-        return this.type;
+        return value.getClass();
     }
 
     public boolean isExportable() {
@@ -86,7 +83,7 @@ public class Setting implements Comparable<Setting> {
 
     public int compareByName(Setting o) {
         if (this.name.compareToIgnoreCase(o.getName())==0 &&
-                this.type == o.getType()) {
+                this.getType() == o.getType()) {
             return 0;
         } else {
             return -1;
