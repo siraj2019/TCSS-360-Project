@@ -4,13 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import main.java.actions.ImportFileDialogAction;
-import main.java.model.Folder;
 
+/**
+ * Contains file menu UI elements.
+ * Elements are initialized in the order in which they appear in the menu.
+ */
 public class FileMenuUI {
     public FileMenuUI(Menu rootMenu) {
         // Import Button
         MenuItem importButton = new MenuItem("Import File...");
-        importButton.addEventHandler(ActionEvent.ACTION, new ImportFileDialogAction(new Folder("root", null)));
+        importButton.addEventHandler(ActionEvent.ACTION, new ImportFileDialogAction(null));
         rootMenu.getItems().add(importButton);
 
         // Settings Button

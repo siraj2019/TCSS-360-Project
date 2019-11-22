@@ -13,6 +13,10 @@ import main.java.model.Setting;
 
 import java.util.UUID;
 
+/**
+ * Represents a setting in the Setting UI as well as
+ * methods to update setting values.
+ */
 public class SettingsUIElement {
 
     private UUID ID;

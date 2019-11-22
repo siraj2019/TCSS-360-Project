@@ -21,6 +21,8 @@ import java.io.InvalidClassException;
 
 /**
  * Main Document list UI
+ * Displays file entities in the main window in a table.
+ * Table columns are based on properties of the entities, such as name, file, etc.
  */
 public class ViewUI{
 
@@ -30,6 +32,10 @@ public class ViewUI{
     private ObservableSet<TableColumn> colSet;
     private Document selectedDocument;
 
+    /**
+     * Default constructor
+     * @param rootPane link to the root pane where this table should be displayed.
+     */
     public void start(BorderPane rootPane) {
         this.docHandler = Controllers.documentHandler;
         this.colTags = FXCollections.observableSet();
@@ -38,6 +44,10 @@ public class ViewUI{
         this.initDocList(rootPane);
     }
 
+    /**
+     * Updates and sets columns, sets initial parameters, and displays the table in the rootPane.
+     * @param rootPane link to the root pane where this table should be displayed.
+     */
     private void initDocList(BorderPane rootPane) {
         try{
             viewList = new TableView<Document>();
@@ -74,6 +84,11 @@ public class ViewUI{
         }
     }
 
+    /**
+     * Gets the list of tags to create columns with from the settings handler's "Columns" setting.
+     * If no columns exist in the setting, update the setting with the default required tags from the TagHandler.
+     * @throws InvalidClassException
+     */
     public void setColumns() throws InvalidClassException {
         Setting<ObservableSet> settingColumns = Controllers.settingsHandler.getSetting("Columns");
         if (settingColumns.getValue().isEmpty()) {
@@ -82,6 +97,9 @@ public class ViewUI{
         this.colTags = (ObservableSet<Tag>) settingColumns.getValue();
     }
 
+    /**
+     * Creates the columns from the column tags and binds them to the table.
+     */
     public void updateColumns() {
 
         // Name Column

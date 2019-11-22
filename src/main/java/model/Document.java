@@ -9,33 +9,60 @@ import main.java.controller.Controllers;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Documents are a type of File Entity that points to a particular file.
+ * Documents are file type agnostic.
+ * Only one file can be represented in each document.
+ */
 public class Document extends FileEntity {
 
     private File file;
 
+    /**
+     * Default constructor
+     * @param name
+     * @param file
+     * @param parent
+     */
     public Document(String name, File file, Folder parent) {
         super(name, parent);
         this.file = file;
 
         this.setTags(Controllers.tagHandler.getTagSetRequiredDocument());
-        initTags();
+        this.initTags();
     }
 
+    @Override
     protected void initTags() {
         super.initTags();
         this.getTag("File").setValue(this.file);
     }
 
+    /**
+     * Returns the document's File, or null if the file does not exist.
+     * Makes no guarantees about the file's readability.
+     * @return
+     */
     public File getFile() {
         return file;
     }
 
+    /**
+     * Link this document to a file.
+     * Makes no guarantees about the file's readability
+     * @param file a non-null File
+     */
     public void setFile(File file) {
         this.file = Objects.requireNonNull(file);
         this.getTag("File").setValue(this.file);
     }
 
-
+    /**
+     * Gets the document's File as a property.
+     * Properties are for use in JavaFX UIs.
+     * Changes to the File will automatically update in the UI table.
+     * @return "file" property
+     */
     public Property fileProperty() {
         return new Property() {
             @Override

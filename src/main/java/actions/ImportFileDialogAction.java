@@ -8,6 +8,12 @@ import main.java.model.Folder;
 import javax.swing.*;
 import java.io.File;
 
+/**
+ * Launches a file import dialog.
+ * Can be called from multiple sources, in contrast to anon inner classes which need to be rewritten for each usage.
+ *
+ * Gets a file from a file chooser and sends the file to the document handler to import.
+ */
 public class ImportFileDialogAction implements EventHandler {
 
 

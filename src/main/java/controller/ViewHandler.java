@@ -6,6 +6,10 @@ import main.java.model.FileEntity;
 import main.java.model.Setting;
 import main.java.model.Tag;
 
+/**
+ * Contains a live list of file entities to feed to the view UI as well as
+ * methods to change the entities and columns displayed.
+ */
 public class ViewHandler {
     private ObservableSet<FileEntity> entitySet;
     private ObservableSet<Tag> columnTagSet;
@@ -13,7 +17,7 @@ public class ViewHandler {
     public ViewHandler() {
         this.entitySet = FXCollections.observableSet();
         Setting colSetting = Controllers.settingsHandler.getSetting("Columns");
-        if(colSetting.getType() == ObservableSet.class) {
+        if(colSetting.getValue().getClass() == ObservableSet.class) {
             this.columnTagSet = (ObservableSet<Tag>) colSetting.getValue();
         }
 

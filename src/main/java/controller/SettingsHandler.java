@@ -13,10 +13,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+ *  Contains a master list of settings as well as
+ *  methods to add, remove, import, and export settings.
+ */
 public class SettingsHandler {
 
     private ObservableSet<Setting> settingList ;
 
+    /**
+     * Creates new list of settings.
+     * Currently creates default settings with empty values:
+     * "Username"
+     * "Email"
+     * "Columns"
+     */
     public SettingsHandler() {
         this.settingList = FXCollections.observableSet();
         addSetting(new Setting<String>("Username", ""));
@@ -25,11 +36,19 @@ public class SettingsHandler {
     }
 
 
-    // Maintains a list of all settings.
+    /**
+     * REturns the master settings list.
+     * @return
+     */
     public ObservableSet<Setting> getSettings() {
         return settingList;
     }
 
+    /**
+     * Gets a particular setting from the lsit by setting name
+     * @param name Name to search for
+     * @return Setting if a match exists, null otherwise.
+     */
     public Setting getSetting(String name) {
         for(Setting s : this.settingList) {
             if (s.compareByName(name) == 0) {
@@ -39,17 +58,25 @@ public class SettingsHandler {
         return null;
     }
 
-    //https://www.tutorialspoint.com/java/util/observable_addobserver.htm
+    /**
+     * Adds a setting to the master list
+     * @param setting Setting to add.
+     */
     public void addSetting(Setting setting) {
         settingList.add(setting);
     }
 
+    /**
+     * Writes a new value to a setting if the new value matches the existing setting's data type.
+     * @param setting Setting to update
+     * @param newValue Value to update to
+     */
     public void updateSetting(Setting setting, Object newValue) {
         for (Setting settingInSet: this.settingList
              ) {
             if (setting.equals(settingInSet)) {
                 try {
-                    settingInSet.setValue(setting.getType().cast(newValue));
+                    settingInSet.setValue(setting.getValue().getClass().cast(newValue));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -59,7 +86,10 @@ public class SettingsHandler {
     }
 
 
-
+    /**
+     * Creates a JSON file from settings in setting list.
+     * @param fileToExport
+     */
     public void writeSettings(File fileToExport) {
         //Add Product to list
         JSONArray settingsToExport = new JSONArray();
@@ -83,7 +113,10 @@ public class SettingsHandler {
         }
     }
 
-
+    /**
+     * Reads all settings from a JSON file and saves the settings to the master list.
+     * @param inputJSONFile
+     */
     public void readSettings(File inputJSONFile)
     {
 
@@ -113,6 +146,11 @@ public class SettingsHandler {
         }
     }
 
+    /**
+     * Reads a setting from a JSON object line.
+     * @param product
+     * @throws ClassNotFoundException
+     */
     private void parseJSONSetting(JSONObject product) throws ClassNotFoundException {
         //Get product object within list
         JSONObject productObject = (JSONObject) product.get("product");
@@ -128,11 +166,6 @@ public class SettingsHandler {
         //Get product value name
         Object value = (String) productObject.get("value");
         System.out.println(value);
-
-
-//        //Get product description name
-//        String desc = (String) productObject.get("description");
-//        System.out.println(desc);
 
         //Get product export name
         String export = (String) productObject.get("exportable");
