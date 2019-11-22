@@ -53,8 +53,13 @@ public class Setting implements Comparable<Setting> {
         return this.value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(Object value) {
+        try{
+            this.value = type.cast(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

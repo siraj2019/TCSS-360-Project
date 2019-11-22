@@ -21,7 +21,7 @@ public class SettingsHandler {
         this.settingList = FXCollections.observableSet();
         addSetting(new Setting("Username", "", String.class));
         addSetting(new Setting("Email", "", String.class));
-        addSetting(new Setting("Columns", FXCollections.observableSet("File Name") , ObservableSet.class) {});
+        addSetting(new Setting("Columns", FXCollections.observableSet() , ObservableSet.class) {});
     }
 
     // Maintains a list of all settings.
@@ -43,18 +43,21 @@ public class SettingsHandler {
         settingList.add(setting);
     }
 
-    public void updateSetting(Setting setting, String newValue) {
+    public void updateSetting(Setting setting, Object newValue) {
         for (Setting settingInSet: this.settingList
              ) {
             if (setting.equals(settingInSet)) {
-                settingInSet.setValue(newValue);
+                try {
+                    settingInSet.setValue(setting.getType().cast(newValue));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
 
 
-
-    //TODO: Create method to export settingsList to a JSON file.
 
     public void writeSettings(File fileToExport) {
         //Add Product to list
@@ -79,7 +82,7 @@ public class SettingsHandler {
         }
     }
 
-    //TODO: Create method to overwrite settingsList with settings from JSON file.
+
     public void readSettings(File inputJSONFile)
     {
 

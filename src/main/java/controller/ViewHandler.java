@@ -3,12 +3,21 @@ package main.java.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import main.java.model.FileEntity;
+import main.java.model.Setting;
+import main.java.model.Tag;
 
 public class ViewHandler {
     private ObservableSet<FileEntity> entitySet;
+    private ObservableSet<Tag> tagSet;
 
     public ViewHandler() {
         this.entitySet = FXCollections.observableSet();
+        Setting colSetting = Controllers.settingsHandler.getSetting("Columns");
+        if(colSetting.getType() == ObservableSet.class) {
+            assert colSetting.getType() = ObservableSet.class;
+            this.tagSet=colSetting.getType().cast(colSetting.getValue());
+        }
+
     }
 
     public ObservableSet<FileEntity> getEntitySet() {
