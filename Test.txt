@@ -1,8 +1,2 @@
-I created a test txt file
-and I will link that with other user
-I am editing this txt file
-
-I am testing how the branch is workking
-
-Add txt on the current virsion
+https://github.com/https-github-com-siraj2019/TCSS-360-Project/blob/dev/src/main/java/controller/SettingsHandler.java
 
