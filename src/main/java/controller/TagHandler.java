@@ -43,6 +43,8 @@ public class TagHandler {
         // Adds all required tags to the tag set.
         // All future tags should be added to the tag set, not the required tags.
         this.tagSet.addAll(this.requiredTagSet);
+
+        this.tagSet.add(new Tag<String>("Project", null));
     }
 
     /**

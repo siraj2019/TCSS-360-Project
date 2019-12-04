@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import main.java.controller.Controllers;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -22,6 +23,7 @@ public class FileEntity {
     private UUID id;
     private String name;
     private Folder parentFolder;
+    private Date createdDate;
     protected ObservableSet<Tag> tags;
 
     /**
@@ -35,6 +37,7 @@ public class FileEntity {
         this.parentFolder = parent;
         this.tags = FXCollections.observableSet();
         this.setTags(Controllers.tagHandler.getTagSetRequiredFileEntity());
+        this.createdDate = new Date(System.currentTimeMillis());
     }
 
     /**
@@ -217,6 +220,144 @@ public class FileEntity {
             @Override
             public void setValue(Object o) {
                 this.setValue(o);
+            }
+        };
+    }
+
+    public Property tagsProperty() {
+        return new Property() {
+            @Override
+            public void bind(ObservableValue observableValue) {
+                this.setValue(observableValue);
+            }
+
+            @Override
+            public void unbind() {
+
+            }
+
+            @Override
+            public boolean isBound() {
+                return false;
+            }
+
+            @Override
+            public void bindBidirectional(Property property) {
+
+            }
+
+            @Override
+            public void unbindBidirectional(Property property) {
+
+            }
+
+            @Override
+            public Object getBean() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "tags";
+            }
+
+            @Override
+            public void addListener(ChangeListener changeListener) {
+
+            }
+
+            @Override
+            public void removeListener(ChangeListener changeListener) {
+
+            }
+
+            @Override
+            public Object getValue() {
+                return tags;
+            }
+
+            @Override
+            public void addListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void removeListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void setValue(Object o) {
+
+            }
+        };
+    }
+
+    public Property dateProperty() {
+        return new Property() {
+            @Override
+            public void bind(ObservableValue observableValue) {
+
+            }
+
+            @Override
+            public void unbind() {
+
+            }
+
+            @Override
+            public boolean isBound() {
+                return false;
+            }
+
+            @Override
+            public void bindBidirectional(Property property) {
+
+            }
+
+            @Override
+            public void unbindBidirectional(Property property) {
+
+            }
+
+            @Override
+            public Object getBean() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "date";
+            }
+
+            @Override
+            public void addListener(ChangeListener changeListener) {
+
+            }
+
+            @Override
+            public void removeListener(ChangeListener changeListener) {
+
+            }
+
+            @Override
+            public Object getValue() {
+                return createdDate;
+            }
+
+            @Override
+            public void addListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void removeListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void setValue(Object o) {
+
             }
         };
     }

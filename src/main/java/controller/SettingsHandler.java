@@ -3,6 +3,7 @@ package main.java.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import main.java.model.Setting;
+import main.java.model.Tag;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,7 +33,15 @@ public class SettingsHandler {
         this.settingList = FXCollections.observableSet();
         addSetting(new Setting<String>("Username", ""));
         addSetting(new Setting<String>("Email", ""));
-        addSetting(new Setting<ObservableSet>("Columns", FXCollections.observableSet()) {});
+        addSetting(new Setting<ObservableSet<Tag>>("Columns", FXCollections.observableSet()) {});
+    }
+
+    private void initSettings() {
+        ObservableSet<Tag> tagSetting = (ObservableSet<Tag>) this.getSetting("Columns");
+        for (Tag t: Controllers.tagHandler.getTags()
+             ) {
+            tagSetting.add(t);
+        }
     }
 
 

@@ -16,15 +16,20 @@ public class ViewHandler {
 
     public ViewHandler() {
         this.entitySet = FXCollections.observableSet();
+        this.columnTagSet = FXCollections.observableSet();
         Setting colSetting = Controllers.settingsHandler.getSetting("Columns");
-        if(colSetting.getValue().getClass() == ObservableSet.class) {
+        //if(colSetting.getValue().getClass() == ObservableSet.class) {
             this.columnTagSet = (ObservableSet<Tag>) colSetting.getValue();
-        }
+        //}
 
     }
 
     public ObservableSet<FileEntity> getEntitySet() {
         return entitySet;
+    }
+
+    public ObservableSet<Tag> getColumnTagSet() {
+        return columnTagSet;
     }
 
     //TODO: update current folder in folder tree

@@ -64,7 +64,6 @@ public class Setting<T> implements Comparable<Setting> {
 
     }
 
-
     public boolean isExportable() {
         return exportable;
     }

@@ -16,8 +16,8 @@ import main.java.model.FileEntity;
 import main.java.model.Setting;
 import main.java.model.Tag;
 
-import java.io.File;
 import java.io.InvalidClassException;
+import java.util.Date;
 
 /**
  * Main Document list UI
@@ -110,10 +110,18 @@ public class ViewUI{
         viewList.getColumns().add(nameColumn);
 
         // File Column
-        TableColumn fileColumn = new TableColumn("File");
+        TableColumn fileColumn = new TableColumn("Date");
         fileColumn.setCellValueFactory(
-                new PropertyValueFactory<FileEntity, File>("file")
+                new PropertyValueFactory<FileEntity, Date>("date")
         );
         viewList.getColumns().add(fileColumn);
+
+        // Project
+        TableColumn newCol = new TableColumn("Project");
+        newCol.setCellValueFactory(
+                new PropertyValueFactory<FileEntity, String>("project")
+        );
+        viewList.getColumns().add(newCol);
+
     }
 }
