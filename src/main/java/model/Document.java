@@ -8,6 +8,7 @@ import main.java.controller.Controllers;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Documents are a type of File Entity that points to a particular file.
@@ -132,6 +133,80 @@ public class Document extends FileEntity {
         };
     }
 
+    public Property<Tag<String>> projectProperty() {
+        return new Property<Tag<String>>() {
+            @Override
+            public void bind(ObservableValue<? extends Tag<String>> observableValue) {
+
+            }
+
+            @Override
+            public void unbind() {
+
+            }
+
+            @Override
+            public boolean isBound() {
+                return false;
+            }
+
+            @Override
+            public void bindBidirectional(Property<Tag<String>> property) {
+
+            }
+
+            @Override
+            public void unbindBidirectional(Property<Tag<String>> property) {
+
+            }
+
+            @Override
+            public Object getBean() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "property";
+            }
+
+            @Override
+            public void addListener(ChangeListener<? super Tag<String>> changeListener) {
+
+            }
+
+            @Override
+            public void removeListener(ChangeListener<? super Tag<String>> changeListener) {
+
+            }
+
+            @Override
+            public Tag<String> getValue() {
+                Optional<Tag> returnTag = tags.stream().filter(t -> t.getName().compareToIgnoreCase("project")==0).findFirst();
+                if(returnTag.isPresent()) {
+                    return returnTag.get();
+                } else {
+                    return null;
+                }
+
+            }
+
+            @Override
+            public void addListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void removeListener(InvalidationListener invalidationListener) {
+
+            }
+
+            @Override
+            public void setValue(Tag<String> stringTag) {
+
+            }
+        };
+    }
 
     @Override
     public String toString() {
