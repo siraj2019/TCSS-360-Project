@@ -4,10 +4,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import javafx.event.EventHandler;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import main.java.controller.Controllers;
 import main.java.controller.DocumentHandler;
@@ -62,6 +64,10 @@ public class ViewUI{
 
             // Only select a single document at a time
             viewList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            //Be able to select individual cells
+            viewList.getSelectionModel().setCellSelectionEnabled(true);
+            // Be able to edit values
+            viewList.setEditable(true);
             // Listen to changes on the selected document
             viewList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Document>() {
                 @Override
@@ -107,21 +113,40 @@ public class ViewUI{
         nameColumn.setCellValueFactory(
                 new PropertyValueFactory<FileEntity,String>("name")
         );
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        nameColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FileEntity, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<FileEntity, String> cellEditEvent) {
+                cellEditEvent.getTableView().getItems().get(
+                        cellEditEvent.getTablePosition().getRow())
+                        .setName(cellEditEvent.getNewValue());
+            }
+        });
         viewList.getColumns().add(nameColumn);
 
-        // File Column
-        TableColumn fileColumn = new TableColumn("Date");
-        fileColumn.setCellValueFactory(
+        // Date Column
+        TableColumn dateColumn = new TableColumn("Date");
+        dateColumn.setCellValueFactory(
                 new PropertyValueFactory<FileEntity, Date>("date")
         );
-        viewList.getColumns().add(fileColumn);
+        viewList.getColumns().add(dateColumn);
 
-        // Project
-        TableColumn newCol = new TableColumn("Project");
-        newCol.setCellValueFactory(
+        // Project Column
+        TableColumn projectColumn = new TableColumn("Project");
+        projectColumn.setCellValueFactory(
                 new PropertyValueFactory<FileEntity, String>("project")
         );
-        viewList.getColumns().add(newCol);
+
+        projectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        projectColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FileEntity, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<FileEntity, String> cellEditEvent) {
+                cellEditEvent.getTableView().getItems().get(
+                        cellEditEvent.getTablePosition().getRow())
+                        .setName(cellEditEvent.getNewValue());
+            }
+        });
+        viewList.getColumns().add(projectColumn);
 
     }
 }
