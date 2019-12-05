@@ -1,7 +1,9 @@
 package main.java.actions;
 
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import main.java.controller.Controllers;
 import main.java.model.Document;
 
@@ -17,25 +19,36 @@ import java.io.IOException;
  */
 public class ExportFileDialogAction implements EventHandler {
 
+    ObservableList<Document> docList;
     Document docToExport;
     File toWrite;
 
-    public ExportFileDialogAction(Document docToExport) {
-        this.docToExport = docToExport;
+    public ExportFileDialogAction() {
+        try {
+            this.docList = Controllers.viewHandler.getSelectedDocuments();
+        }   catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void handle(Event event) {
-        JFileChooser fileToExportDialog = new JFileChooser();
-
-
-        int openedFile = fileToExportDialog.showSaveDialog(null);
-        if(openedFile == JFileChooser.APPROVE_OPTION) {
-            toWrite = fileToExportDialog.getSelectedFile();
-        }
         try {
-			Controllers.documentHandler.exportDocument(docToExport, toWrite);
-		} catch (IOException e) {
+            this.docToExport = docList.get(0);
+
+            JFileChooser fileToExportDialog = new JFileChooser();
+            fileToExportDialog.setSelectedFile(new File(docToExport.getName()));
+
+            int openedFile = fileToExportDialog.showSaveDialog(null);
+            if(openedFile == JFileChooser.APPROVE_OPTION) {
+                toWrite = fileToExportDialog.getSelectedFile();
+                Controllers.documentHandler.exportDocument(docToExport, toWrite);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            new Alert(Alert.AlertType.ERROR, "No file selected").show();
+        }
+
+        catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

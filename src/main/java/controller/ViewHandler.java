@@ -1,7 +1,9 @@
 package main.java.controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import main.java.model.Document;
 import main.java.model.FileEntity;
 import main.java.model.Setting;
 import main.java.model.Tag;
@@ -13,6 +15,7 @@ import main.java.model.Tag;
 public class ViewHandler {
     private ObservableSet<FileEntity> entitySet;
     private ObservableSet<Tag> columnTagSet;
+    private ObservableList<Document> selectedDocuments;
 
     public ViewHandler() {
         this.entitySet = FXCollections.observableSet();
@@ -22,6 +25,14 @@ public class ViewHandler {
             this.columnTagSet = (ObservableSet<Tag>) colSetting.getValue();
         //}
 
+    }
+
+    public ObservableList<Document> getSelectedDocuments() {
+        return selectedDocuments;
+    }
+
+    public void setSelectedDocuments(ObservableList<Document> selectedDocuments) {
+        this.selectedDocuments = selectedDocuments;
     }
 
     public ObservableSet<FileEntity> getEntitySet() {

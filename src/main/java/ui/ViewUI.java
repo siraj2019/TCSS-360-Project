@@ -3,14 +3,17 @@ package main.java.ui;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
+import main.java.actions.ExportFileDialogAction;
+import main.java.actions.ImportFileDialogAction;
 import main.java.controller.Controllers;
 import main.java.controller.DocumentHandler;
 import main.java.model.Document;
@@ -18,6 +21,8 @@ import main.java.model.FileEntity;
 import main.java.model.Setting;
 import main.java.model.Tag;
 
+import java.awt.*;
+import java.io.IOException;
 import java.io.InvalidClassException;
 import java.util.Date;
 
@@ -32,7 +37,8 @@ public class ViewUI{
     private TableView<Document> viewList;
     private ObservableSet<Tag> colTags;
     private ObservableSet<TableColumn> colSet;
-    private Document selectedDocument;
+    private ObservableList<Document> selectedDocuments;
+    private ContextMenu contextMenu;
 
     /**
      * Default constructor
@@ -42,7 +48,8 @@ public class ViewUI{
         this.docHandler = Controllers.documentHandler;
         this.colTags = FXCollections.observableSet();
         this.colSet = FXCollections.observableSet();
-        this.selectedDocument = null;
+        this.selectedDocuments = FXCollections.observableArrayList();
+        this.contextMenu = new ContextMenu();
         this.initDocList(rootPane);
     }
 
@@ -64,8 +71,6 @@ public class ViewUI{
 
             // Only select a single document at a time
             viewList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            //Be able to select individual cells
-            viewList.getSelectionModel().setCellSelectionEnabled(true);
             // Be able to edit values
             viewList.setEditable(true);
             // Listen to changes on the selected document
@@ -79,15 +84,23 @@ public class ViewUI{
             viewList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<Document>() {
                 @Override
                 public void changed(ObservableValue<? extends Document> observableValue, Document document, Document t1) {
-                    selectedDocument = t1;
+                    selectedDocuments.removeAll();
+                    selectedDocuments.add(t1);
                 }
             });
+            // Binds the list in the view handler to the selection.
+            Controllers.viewHandler.setSelectedDocuments(this.selectedDocuments);
 
-
+            // Adds right click menu
+            viewList.setContextMenu(contextMenu);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<Document> getSelectedDocuments() {
+        return selectedDocuments;
     }
 
     /**
@@ -95,7 +108,7 @@ public class ViewUI{
      * If no columns exist in the setting, update the setting with the default required tags from the TagHandler.
      * @throws InvalidClassException
      */
-    public void setColumns() throws InvalidClassException {
+    private void setColumns() throws InvalidClassException {
         Setting<ObservableSet> settingColumns = Controllers.settingsHandler.getSetting("Columns");
         if (settingColumns.getValue().isEmpty()) {
             settingColumns.getValue().addAll(Controllers.tagHandler.getTagSetRequiredFileEntity());
@@ -106,7 +119,7 @@ public class ViewUI{
     /**
      * Creates the columns from the column tags and binds them to the table.
      */
-    public void updateColumns() {
+    private void updateColumns() {
 
         // Name Column
         TableColumn nameColumn = new TableColumn("Name");
@@ -148,5 +161,32 @@ public class ViewUI{
         });
         viewList.getColumns().add(projectColumn);
 
+    }
+
+    private void initContextMenu() {
+        MenuItem importChoice = new MenuItem("Import...");
+        MenuItem exportChoice = new MenuItem("Export...");
+        MenuItem openChoice = new MenuItem("Open");
+
+        importChoice.setOnAction(e -> {
+            new ImportFileDialogAction(null);
+        });
+
+        exportChoice.setOnAction(e -> {
+            new ExportFileDialogAction();
+        });
+
+        openChoice.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Desktop.getDesktop().open(viewList.getSelectionModel().getSelectedItem().getFile());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        this.contextMenu.getItems().addAll(importChoice, exportChoice, openChoice);
     }
 }
