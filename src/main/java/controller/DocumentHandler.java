@@ -64,7 +64,31 @@ public class DocumentHandler {
         }
 
     }
-    //TODO: create file writing method given a document and a destination File
-    public void exportDocument(Document document, File toWrite) {
+    
+    /**
+     * Exports document by extracting the file from a Document object passed as an argument
+     * and writing the information from it to the destination File also passed as an
+     * argument.
+     * @author Jesse Geray
+     * @param document you wish to export
+     * @param toWrite destination file for export
+     * @throws IOException
+     */ 
+    public void exportDocument(Document document, File toWrite) throws IOException {
+        File source = document.getFile();
+    	InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(toWrite);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
+        }
     }
 }
