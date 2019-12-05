@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import main.java.model.Document;
 import main.java.model.Folder;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * Contains a master list of all documents in memory as well as
