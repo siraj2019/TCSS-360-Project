@@ -7,6 +7,7 @@ import main.java.model.Document;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Launches a file import dialog.
@@ -32,6 +33,11 @@ public class ExportFileDialogAction implements EventHandler {
         if(openedFile == JFileChooser.APPROVE_OPTION) {
             toWrite = fileToExportDialog.getSelectedFile();
         }
-        Controllers.documentHandler.exportDocument(docToExport, toWrite);
+        try {
+			Controllers.documentHandler.exportDocument(docToExport, toWrite);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
