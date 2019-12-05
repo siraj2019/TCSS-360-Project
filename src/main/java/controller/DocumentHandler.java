@@ -64,4 +64,7 @@ public class DocumentHandler {
         }
 
     }
+    //TODO: create file writing method given a document and a destination File
+    public void exportDocument(Document document, File toWrite) {
+    }
 }
