@@ -109,7 +109,7 @@ public class DataSourceHandler {
             psFetch.setString(3, fileString);
             psFetch.setString(4, projectString);
             psFetch.setString(5, idString);
-            psFetch.executeQuery();
+            psFetch.executeUpdate();
             System.out.println("Document updated in DB: " + document.toString());
 
         } catch (SQLException e) {
