@@ -93,6 +93,7 @@ public class ViewUI{
 
             // Adds right click menu
             viewList.setContextMenu(contextMenu);
+            initContextMenu();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,13 +169,9 @@ public class ViewUI{
         MenuItem exportChoice = new MenuItem("Export...");
         MenuItem openChoice = new MenuItem("Open");
 
-        importChoice.setOnAction(e -> {
-            new ImportFileDialogAction(null);
-        });
+        importChoice.addEventHandler(ActionEvent.ACTION, new ImportFileDialogAction(null));
 
-        exportChoice.setOnAction(e -> {
-            new ExportFileDialogAction();
-        });
+        exportChoice.addEventHandler(ActionEvent.ACTION, new ExportFileDialogAction());
 
         openChoice.setOnAction(new EventHandler<ActionEvent>() {
             @Override

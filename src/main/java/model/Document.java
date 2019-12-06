@@ -9,6 +9,7 @@ import main.java.controller.Controllers;
 import java.io.File;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Documents are a type of File Entity that points to a particular file.
@@ -31,6 +32,13 @@ public class Document extends FileEntity {
 
         this.setTags(Controllers.tagHandler.getTagSetRequiredDocument());
         this.initTags();
+    }
+
+    public Document(String name, File file, UUID id) {
+        super(name, null, id);
+        this.file = file;
+        //this.setTags(Controllers.tagHandler.getTagSetRequiredDocument());
+        //this.initTags();
     }
 
     @Override
@@ -203,7 +211,11 @@ public class Document extends FileEntity {
 
             @Override
             public void setValue(Tag<String> stringTag) {
-
+                Optional<Tag> returnTag = tags.stream().filter(t -> t.getName().compareToIgnoreCase("project")==0).findFirst();
+                if(returnTag.isPresent()) {
+                    returnTag.get().setValue(stringTag.getValue());
+                } else {
+                }
             }
         };
     }
