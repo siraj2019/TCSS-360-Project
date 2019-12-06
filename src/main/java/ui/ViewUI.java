@@ -151,7 +151,7 @@ public class ViewUI{
                 new PropertyValueFactory<FileEntity, String>("project")
         );
 
-        //projectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        projectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         projectColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FileEntity, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FileEntity, String> cellEditEvent) {

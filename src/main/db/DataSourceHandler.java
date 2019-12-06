@@ -13,7 +13,7 @@ public class DataSourceHandler {
     private DataSource database;
 
 
-    /*
+    /**
     Database columns
     Documents   :   id  name    file    project
      */
@@ -27,6 +27,11 @@ public class DataSourceHandler {
 
     }
 
+    /**
+     * Culls query resources. Use after every query method.
+     * @param conn
+     * @param rs
+     */
     private void releaseResources(Connection conn, ResultSet rs) {
         // release all open resources to avoid unnecessary memory usage
 
@@ -51,6 +56,10 @@ public class DataSourceHandler {
         }
     }
 
+    /**
+     * Adds a new document to the database.
+     * @param document
+     */
     public void addDocument(Document document) {
         Connection conn = null;
         try {
@@ -90,6 +99,10 @@ public class DataSourceHandler {
 
     }
 
+    /**
+     * Updates every field in the documents database row that matches a given document's ID.
+     * @param document
+     */
     public void updateDocument(Document document) {
         ResultSet results = null;
         Connection conn = null;
@@ -109,7 +122,7 @@ public class DataSourceHandler {
             psFetch.setString(3, fileString);
             psFetch.setString(4, projectString);
             psFetch.setString(5, idString);
-            psFetch.executeQuery();
+            psFetch.executeUpdate();
             System.out.println("Document updated in DB: " + document.toString());
 
         } catch (SQLException e) {
@@ -119,6 +132,12 @@ public class DataSourceHandler {
         }
     }
 
+    /**
+     * Creates a list of all documents in the database.
+     * This list is passed to the DocumentHandler to initialize the in-memory document list.
+     * Fails on missing or mal-formed document arguments.
+     * @return
+     */
     public ArrayList<Document> getDocuments() {
         ResultSet results = null;
         Connection conn = null;
