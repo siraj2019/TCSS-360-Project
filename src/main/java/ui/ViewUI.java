@@ -19,7 +19,6 @@ import main.java.controller.DocumentHandler;
 import main.java.model.Document;
 import main.java.model.FileEntity;
 import main.java.model.Setting;
-import main.java.model.Tag;
 
 import java.awt.*;
 import java.io.IOException;
@@ -35,7 +34,6 @@ public class ViewUI{
 
     private DocumentHandler docHandler;
     private TableView<Document> viewList;
-    private ObservableSet<Tag> colTags;
     private ObservableSet<TableColumn> colSet;
     private ObservableList<Document> selectedDocuments;
     private ContextMenu contextMenu;
@@ -46,7 +44,6 @@ public class ViewUI{
      */
     public void start(BorderPane rootPane) {
         this.docHandler = Controllers.documentHandler;
-        this.colTags = FXCollections.observableSet();
         this.colSet = FXCollections.observableSet();
         this.selectedDocuments = FXCollections.observableArrayList();
         this.contextMenu = new ContextMenu();
@@ -114,7 +111,6 @@ public class ViewUI{
         if (settingColumns.getValue().isEmpty()) {
             settingColumns.getValue().addAll(Controllers.tagHandler.getTagSetRequiredFileEntity());
         }
-        this.colTags = (ObservableSet<Tag>) settingColumns.getValue();
     }
 
     /**
