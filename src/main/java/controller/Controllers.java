@@ -9,9 +9,10 @@ public class Controllers {
 
     public static DataSourceHandler dataSourceHandler;
     public static SettingsHandler settingsHandler;
+    public static TagHandler tagHandler;
     public static DocumentHandler documentHandler;
     public static ViewHandler viewHandler;
-    public static TagHandler tagHandler;
+
 
     /**
      * Initializes new handlers
@@ -20,8 +21,9 @@ public class Controllers {
 
         dataSourceHandler = new DataSourceHandler();
         settingsHandler = new SettingsHandler();
+        tagHandler = new TagHandler();
         documentHandler = new DocumentHandler();
         viewHandler = new ViewHandler();
-        tagHandler = new TagHandler();
+
     }
 }

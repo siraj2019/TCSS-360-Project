@@ -49,7 +49,7 @@ public class FileEntity {
         this.name = name;
         this.parentFolder = parent;
         this.tags = FXCollections.observableSet();
-        //this.setTags(Controllers.tagHandler.getTagSetRequiredFileEntity());
+        this.setTags(Controllers.tagHandler.getTagSetRequiredFileEntity());
         this.createdDate = new Date(System.currentTimeMillis());
     }
 

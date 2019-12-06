@@ -91,7 +91,32 @@ public class DataSourceHandler {
     }
 
     public void updateDocument(Document document) {
+        ResultSet results = null;
+        Connection conn = null;
+        try {
+            conn = database.getConnect();
+            // Selects a document
+            String idString = document.getId().toString();
+            String nameString = document.getName();
+            String fileString = document.getFile().getPath();
+            String projectString = document.getTag("project").getValue().toString();
 
+            Statement s = conn.createStatement();
+            PreparedStatement psFetch = conn.prepareStatement(
+                    "UPDATE documents set id=?, name=?, file=?, project=? WHERE id=?");
+            psFetch.setString(1, idString);
+            psFetch.setString(2, nameString);
+            psFetch.setString(3, fileString);
+            psFetch.setString(4, projectString);
+            psFetch.setString(5, idString);
+            psFetch.executeQuery();
+            System.out.println("Document updated in DB: " + document.toString());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseResources(conn, results);
+        }
     }
 
     public ArrayList<Document> getDocuments() {
@@ -106,11 +131,6 @@ public class DataSourceHandler {
                     "SELECT * FROM documents");
             results = psFetch.executeQuery();
 
-            /*
-            if (!results.next())
-            {
-                System.out.println("No rows in results!");
-            }*/
 
             while (results.next()) {
                 System.out.println("Begin Import");
@@ -122,12 +142,17 @@ public class DataSourceHandler {
                 System.out.println(resultName);
                 File resultFile = new File(results.getString("file"));
                 System.out.println(resultFile);
-                Tag<String> returnProject = new Tag<String>("project", results.getString("project")) ;
-                System.out.println(returnProject.getValue());
+                Tag<String> returnProject = null;
+                String returnProjectString = results.getString("project");
+                if (returnProjectString != "null") {
+                   returnProject = new Tag<String>("project", returnProjectString);
+                }
+
+                System.out.println(returnProjectString);
                 // Returns a document object
                 returnDoc = new Document(resultName, resultFile, resultID);
                 System.out.println("Doc created");
-                returnDoc.projectProperty().setValue(returnProject);
+                returnDoc.projectProperty().setValue(returnProjectString);
 
                 returnList.add(returnDoc);
 
@@ -169,7 +194,7 @@ public class DataSourceHandler {
 
             // Returns a document object
             returnDoc = new Document(resultName, resultFile, resultID);
-            returnDoc.projectProperty().setValue(returnProject);
+            returnDoc.projectProperty().setValue(returnProject.getValue());
 
             System.out.println("Fetched Doc with ID=" + idString);
             System.out.println("New Document: " + returnDoc.toString());

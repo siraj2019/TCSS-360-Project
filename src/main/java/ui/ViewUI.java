@@ -151,13 +151,21 @@ public class ViewUI{
                 new PropertyValueFactory<FileEntity, String>("project")
         );
 
-        projectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //projectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         projectColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FileEntity, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FileEntity, String> cellEditEvent) {
-                cellEditEvent.getTableView().getItems().get(
-                        cellEditEvent.getTablePosition().getRow())
-                        .setName(cellEditEvent.getNewValue());
+                Document entity = (Document) cellEditEvent.getTableView().getItems().get(
+                        cellEditEvent.getTablePosition().getRow());
+                String newTag = entity.projectProperty().getValue();
+                if (newTag != null) {
+                    newTag = cellEditEvent.getNewValue();
+                } else {
+                    newTag = cellEditEvent.getNewValue();
+                }
+
+                entity.projectProperty().setValue(newTag);
+
             }
         });
         viewList.getColumns().add(projectColumn);
